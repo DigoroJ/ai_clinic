@@ -1,0 +1,221 @@
+/* =========================================================
+   APPOINTMENT PROGRESS
+========================================================= */
+
+.appointment-progress {
+  width: 100%;
+  max-width: 720px;
+
+  margin: 20px auto 30px;
+
+  display: flex;
+  align-items: flex-start;
+
+  box-sizing: border-box;
+
+  padding: 0 10px;
+}
+
+
+/* =========================================================
+   STEP
+========================================================= */
+
+.progress-step {
+  flex: 0 0 auto;
+
+  width: 90px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  text-align: center;
+
+  color: #888;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CIRCLE
+========================================================= */
+
+.step-circle {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #aeb4be;
+
+  border-radius: 50%;
+
+  background: #aeb4be;
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  box-sizing: border-box;
+}
+
+.step-circle .material-icons {
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   ACTIVE STEP
+========================================================= */
+
+.progress-step.active {
+  color: #2864dc;
+}
+
+.progress-step.active .step-circle {
+  background: #2864dc;
+
+  border-color: #2864dc;
+
+  color: white;
+}
+
+
+/* =========================================================
+   COMPLETED STEP
+========================================================= */
+
+.progress-step.completed {
+  color: #555;
+}
+
+.progress-step.completed .step-circle {
+  background: #2864dc;
+
+  border-color: #2864dc;
+
+  color: white;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.step-label {
+  display: block;
+
+  margin-top: 7px;
+
+  white-space: nowrap;
+
+  font-size: 11px;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   CONNECTING LINE
+========================================================= */
+
+.progress-line {
+  flex: 1;
+
+  height: 1px;
+
+  min-width: 20px;
+
+  margin-top: 17px;
+
+  background: #b8bdc5;
+}
+
+
+/* COMPLETED LINE */
+
+.progress-line.completed-line {
+  background: #2864dc;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .appointment-progress {
+    width: 100%;
+
+    padding: 0 8px;
+
+    margin: 15px auto 25px;
+  }
+
+  .progress-step {
+    width: auto;
+
+    flex: 0 0 auto;
+  }
+
+  .step-circle {
+    width: 32px;
+    height: 32px;
+
+    font-size: 13px;
+  }
+
+  .step-label {
+    font-size: 9px;
+
+    margin-top: 6px;
+  }
+
+  .progress-line {
+    min-width: 15px;
+
+    margin-top: 16px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .appointment-progress {
+    padding: 0 4px;
+  }
+
+  .step-circle {
+    width: 29px;
+    height: 29px;
+  }
+
+  .step-circle .material-icons {
+    font-size: 15px;
+  }
+
+  .step-label {
+    font-size: 8px;
+  }
+
+  .progress-line {
+    min-width: 10px;
+
+    margin-top: 14px;
+  }
+
+}

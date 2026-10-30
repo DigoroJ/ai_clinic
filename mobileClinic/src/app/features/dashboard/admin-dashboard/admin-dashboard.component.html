@@ -1,0 +1,431 @@
+<div class="dashboard">
+
+  <!-- MAIN CONTENT -->
+  <main class="dashboard-content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+
+      <div>
+        <h1>Dashboard</h1>
+
+        <p>
+          Overview of your mobile clinic operations
+        </p>
+      </div>
+
+      <button class="primary-button">
+
+        <span class="material-icons">
+          add
+        </span>
+
+        New Appointment
+
+      </button>
+
+    </div>
+
+
+    <!-- ==========================
+         STATISTICS
+    =========================== -->
+
+    <section class="statistics">
+
+      <div class="stat-card">
+
+        <div class="stat-icon patients">
+          <span class="material-icons">
+            people
+          </span>
+        </div>
+
+        <div class="stat-information">
+
+          <span class="stat-title">
+            Patients
+          </span>
+
+          <strong>
+            {{ statistics.patients | number }}
+          </strong>
+
+          <span class="stat-change positive">
+            +12% this month
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon doctors">
+          <span class="material-icons">
+            medical_services
+          </span>
+        </div>
+
+        <div class="stat-information">
+
+          <span class="stat-title">
+            Doctors
+          </span>
+
+          <strong>
+            {{ statistics.doctors }}
+          </strong>
+
+          <span class="stat-change positive">
+            +2 this month
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon nurses">
+          <span class="material-icons">
+            health_and_safety
+          </span>
+        </div>
+
+        <div class="stat-information">
+
+          <span class="stat-title">
+            Nurses
+          </span>
+
+          <strong>
+            {{ statistics.nurses }}
+          </strong>
+
+          <span class="stat-change positive">
+            +8 this month
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <div class="stat-icon appointments">
+          <span class="material-icons">
+            calendar_month
+          </span>
+        </div>
+
+        <div class="stat-information">
+
+          <span class="stat-title">
+            Appointments
+          </span>
+
+          <strong>
+            {{ statistics.appointments | number }}
+          </strong>
+
+          <span class="stat-change positive">
+            +18% this month
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================
+         ANALYTICS
+    =========================== -->
+
+    <section class="analytics-grid">
+
+
+      <!-- PATIENT VISITS -->
+      <div class="card visits-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Patient Visits</h2>
+
+            <p>
+              Patient visits over time
+            </p>
+          </div>
+
+          <select>
+            <option>Last 7 days</option>
+            <option>Last 30 days</option>
+            <option>Last 6 months</option>
+          </select>
+
+        </div>
+
+
+        <div class="chart">
+
+          <div class="chart-y-axis">
+            <span>100</span>
+            <span>75</span>
+            <span>50</span>
+            <span>25</span>
+            <span>0</span>
+          </div>
+
+          <div class="chart-area">
+
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+
+            <div class="chart-bars">
+
+              <div class="bar" style="height: 45%">
+                <span>Mon</span>
+              </div>
+
+              <div class="bar" style="height: 60%">
+                <span>Tue</span>
+              </div>
+
+              <div class="bar" style="height: 75%">
+                <span>Wed</span>
+              </div>
+
+              <div class="bar" style="height: 55%">
+                <span>Thu</span>
+              </div>
+
+              <div class="bar" style="height: 85%">
+                <span>Fri</span>
+              </div>
+
+              <div class="bar" style="height: 70%">
+                <span>Sat</span>
+              </div>
+
+              <div class="bar" style="height: 40%">
+                <span>Sun</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- AI INSIGHTS -->
+      <div class="card ai-card">
+
+        <div class="card-header">
+
+          <div class="ai-title">
+
+            <div class="ai-icon">
+
+              <span class="material-icons">
+                psychology
+              </span>
+
+            </div>
+
+            <div>
+              <h2>AI Insights</h2>
+
+              <p>
+                Today's analysis
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="ai-metric">
+
+          <div>
+            <span>
+              High Priority
+            </span>
+
+            <small>
+              Predicted triage
+            </small>
+          </div>
+
+          <strong>
+            18
+          </strong>
+
+        </div>
+
+
+        <div class="ai-metric">
+
+          <div>
+            <span>
+              Expected Patients
+            </span>
+
+            <small>
+              Next clinic visit
+            </small>
+          </div>
+
+          <strong>
+            86
+          </strong>
+
+        </div>
+
+
+        <div class="ai-metric">
+
+          <div>
+            <span>
+              Model Accuracy
+            </span>
+
+            <small>
+              Current model
+            </small>
+          </div>
+
+          <strong>
+            --
+          </strong>
+
+        </div>
+
+
+        <button class="ai-button">
+
+          <span class="material-icons">
+            analytics
+          </span>
+
+          View AI Analytics
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================
+         APPOINTMENTS
+    =========================== -->
+
+    <section class="card appointments-card">
+
+      <div class="card-header">
+
+        <div>
+          <h2>Recent Appointments</h2>
+
+          <p>
+            Latest mobile clinic appointments
+          </p>
+        </div>
+
+        <a
+          routerLink="/appointments"
+          class="view-all"
+        >
+          View all
+        </a>
+
+      </div>
+
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Patient</th>
+              <th>Doctor</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            <tr
+              *ngFor="let appointment of appointments"
+            >
+
+              <td>
+
+                <div class="patient-name">
+                  {{ appointment.patient }}
+                </div>
+
+              </td>
+
+              <td>
+                {{ appointment.doctor }}
+              </td>
+
+              <td>
+                {{ appointment.date }}
+              </td>
+
+              <td>
+
+                <span
+                  class="status"
+                  [ngClass]="getStatusClass(appointment.status)"
+                >
+                  {{ appointment.status }}
+                </span>
+
+              </td>
+
+              <td>
+
+                <button class="action-button">
+
+                  <span class="material-icons">
+                    more_horiz
+                  </span>
+
+                </button>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

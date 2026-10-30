@@ -1,0 +1,182 @@
+.patient-page {
+  min-height: 100vh;
+  width: 100%;
+  padding: 24px 16px 60px;
+  box-sizing: border-box;
+
+  background: #f8f9fa;
+  color: #151b2b;
+}
+
+.patient-content {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-bottom: 14px;
+  padding: 6px 4px;
+
+  border: none;
+  background: transparent;
+  color: #2864dc;
+
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+
+h2 {
+  margin: 26px 0 10px;
+  font-size: 16px;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.item-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 10px;
+  padding: 14px 16px;
+
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(21, 27, 43, 0.08);
+}
+
+.date-box {
+  width: 56px;
+  min-width: 56px;
+  padding: 8px 0;
+
+  border-radius: 12px;
+  background: #e8f0fd;
+  color: #1f52b8;
+
+  text-align: center;
+}
+
+.date-box span {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.date-box strong {
+  font-size: 22px;
+}
+
+.item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-info strong {
+  display: block;
+  font-size: 15px;
+}
+
+.item-info span,
+.item-info small {
+  display: block;
+  margin-top: 2px;
+
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.chip {
+  display: inline-block;
+  padding: 2px 10px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.chip.pending { background: #f3f4f6; color: #4b5563; }
+.chip.confirmed { background: #e3edfd; color: #1f52b8; }
+.chip.completed { background: #e8f5e9; color: #1b6b2f; }
+.chip.cancelled { background: #fdecea; color: #b3261e; }
+
+.cancel-button {
+  padding: 6px 12px;
+
+  border: 1px solid #f1b8b4;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #b3261e;
+
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancel-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.primary-button {
+  margin-top: 8px;
+  padding: 12px 18px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #2864dc;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.message {
+  margin: 12px 0;
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+}
+
+.message.error { background: #fdecea; color: #b3261e; }
+.message.success { background: #e8f5e9; color: #1b6b2f; }
+
+.record-card {
+  margin-bottom: 10px;
+  padding: 14px 16px;
+
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(21, 27, 43, 0.08);
+}
+
+.record-card h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.record-card p {
+  margin: 8px 0 0;
+  font-size: 14px;
+}

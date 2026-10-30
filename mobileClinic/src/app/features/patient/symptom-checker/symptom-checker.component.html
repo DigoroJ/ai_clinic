@@ -1,0 +1,370 @@
+<div class="symptom-checker-page">
+
+  <main class="symptom-content">
+
+    <button
+      type="button"
+      class="back-button"
+      (click)="goBack()">
+
+      <span class="material-icons">
+        arrow_back
+      </span>
+
+      Back
+    </button>
+
+
+    <div class="page-header">
+
+      <div class="header-icon">
+        <span class="material-icons">
+          health_and_safety
+        </span>
+      </div>
+
+      <h1>Symptom Checker</h1>
+
+      <p>
+        Tell us about your symptoms and we'll help
+        guide you to the appropriate clinic service.
+      </p>
+
+    </div>
+
+
+    <!-- Symptoms -->
+
+    <section class="checker-section">
+
+      <div class="section-heading">
+
+        <span class="step-number">1</span>
+
+        <div>
+          <h2>What symptoms are you experiencing?</h2>
+
+          <p>
+            Select all that apply.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="symptom-grid">
+
+        <button
+          type="button"
+          *ngFor="let symptom of symptoms"
+          class="symptom-card"
+          [class.selected]="isSelected(symptom.id)"
+          (click)="toggleSymptom(symptom.id)">
+
+          <span class="material-icons">
+            {{ symptom.icon }}
+          </span>
+
+          <span>
+            {{ symptom.name }}
+          </span>
+
+          <span
+            *ngIf="isSelected(symptom.id)"
+            class="material-icons check-icon">
+
+            check_circle
+
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- Duration -->
+
+    <section class="checker-section">
+
+      <div class="section-heading">
+
+        <span class="step-number">2</span>
+
+        <div>
+          <h2>How long have you had these symptoms?</h2>
+        </div>
+
+      </div>
+
+
+      <div class="option-group">
+
+        <label
+          class="option-card"
+          [class.selected]="duration === 'today'">
+
+          <input
+            type="radio"
+            name="duration"
+            value="today"
+            [(ngModel)]="duration">
+
+          <span>Today</span>
+
+        </label>
+
+
+        <label
+          class="option-card"
+          [class.selected]="duration === 'few-days'">
+
+          <input
+            type="radio"
+            name="duration"
+            value="few-days"
+            [(ngModel)]="duration">
+
+          <span>2–3 days</span>
+
+        </label>
+
+
+        <label
+          class="option-card"
+          [class.selected]="duration === 'week'">
+
+          <input
+            type="radio"
+            name="duration"
+            value="week"
+            [(ngModel)]="duration">
+
+          <span>About a week</span>
+
+        </label>
+
+
+        <label
+          class="option-card"
+          [class.selected]="duration === 'longer'">
+
+          <input
+            type="radio"
+            name="duration"
+            value="longer"
+            [(ngModel)]="duration">
+
+          <span>More than a week</span>
+
+        </label>
+
+      </div>
+
+    </section>
+
+
+    <!-- Severity -->
+
+    <section class="checker-section">
+
+      <div class="section-heading">
+
+        <span class="step-number">3</span>
+
+        <div>
+          <h2>How would you describe the severity?</h2>
+        </div>
+
+      </div>
+
+
+      <div class="option-group">
+
+        <label
+          class="option-card"
+          [class.selected]="severity === 'mild'">
+
+          <input
+            type="radio"
+            name="severity"
+            value="mild"
+            [(ngModel)]="severity">
+
+          <span>Mild</span>
+
+        </label>
+
+
+        <label
+          class="option-card"
+          [class.selected]="severity === 'moderate'">
+
+          <input
+            type="radio"
+            name="severity"
+            value="moderate"
+            [(ngModel)]="severity">
+
+          <span>Moderate</span>
+
+        </label>
+
+
+        <label
+          class="option-card"
+          [class.selected]="severity === 'severe'">
+
+          <input
+            type="radio"
+            name="severity"
+            value="severe"
+            [(ngModel)]="severity">
+
+          <span>Severe</span>
+
+        </label>
+
+      </div>
+
+    </section>
+
+
+    <!-- About you (needed by the AI model) -->
+    <section class="checker-section">
+
+      <div class="section-heading">
+        <span class="step-number">4</span>
+        <div>
+          <h2>A few details about you</h2>
+          <p>The AI model needs these to make a prediction.</p>
+        </div>
+      </div>
+
+      <div class="about-grid">
+
+        <label class="about-field">
+          <span>Age (years)</span>
+          <input
+            type="number"
+            name="age"
+            min="0"
+            max="120"
+            placeholder="e.g. 35"
+            [(ngModel)]="age">
+        </label>
+
+        <label class="about-field">
+          <span>Gender</span>
+          <select name="gender" [(ngModel)]="gender">
+            <option value="" disabled>Select</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+          </select>
+        </label>
+
+        <label class="about-field">
+          <span>Body temperature (°C)</span>
+          <input
+            type="number"
+            name="temperature"
+            step="0.1"
+            min="30"
+            max="43"
+            placeholder="e.g. 36.6"
+            [(ngModel)]="temperature">
+        </label>
+
+      </div>
+
+      <div class="section-heading sub-heading">
+        <div>
+          <h2>Have you travelled recently?</h2>
+        </div>
+      </div>
+
+      <div class="option-group">
+
+        <label class="option-card" [class.selected]="travel === 'yes'">
+          <input type="radio" name="travel" value="yes" [(ngModel)]="travel">
+          <span>Yes</span>
+        </label>
+
+        <label class="option-card" [class.selected]="travel === 'no'">
+          <input type="radio" name="travel" value="no" [(ngModel)]="travel">
+          <span>No</span>
+        </label>
+
+      </div>
+
+    </section>
+
+    <!-- Disclaimer -->
+
+    <div class="disclaimer">
+
+      <span class="material-icons">
+        info
+      </span>
+
+      <p>
+        This tool provides general guidance only and does not
+        provide a medical diagnosis. If you are concerned about
+        your symptoms, please speak with a qualified healthcare
+        professional.
+      </p>
+
+    </div>
+
+
+    <div class="checker-error" *ngIf="errorMessage" role="alert">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Continue -->
+
+    <button
+      type="button"
+      class="continue-button"
+      [disabled]="!canContinue()"
+      (click)="checkSymptoms()">
+
+      {{ loading ? 'Analysing...' : 'Check Symptoms' }}
+
+      <span class="material-icons">
+        arrow_forward
+      </span>
+
+    </button>
+
+  </main>
+
+
+  <!-- Mobile navigation -->
+
+  <nav class="mobile-bottom-nav">
+
+    <a routerLink="/patient/dashboard">
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </a>
+
+    <a routerLink="/patient/appointments">
+      <span class="material-icons">event</span>
+      <span>Appointments</span>
+    </a>
+
+    <a routerLink="/patient/records">
+      <span class="material-icons">description</span>
+      <span>Records</span>
+    </a>
+
+    <a routerLink="/patient/profile">
+      <span class="material-icons">person</span>
+      <span>Profile</span>
+    </a>
+
+  </nav>
+
+</div>

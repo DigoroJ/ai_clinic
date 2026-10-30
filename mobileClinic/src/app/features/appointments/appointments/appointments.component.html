@@ -1,0 +1,186 @@
+<div class="page">
+
+  <div class="page-header">
+    <div>
+      <h1>Appointments</h1>
+      <p>Manage patient appointments and schedules.</p>
+    </div>
+
+    <button type="button" class="primary-button">
+      <span class="material-icons">add</span>
+      New Appointment
+    </button>
+  </div>
+
+  <!-- Appointment Statistics -->
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">event</span>
+      </div>
+      <div>
+        <span>Today's Appointments</span>
+        <strong>{{ todaysAppointments }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">pending_actions</span>
+      </div>
+      <div>
+        <span>Pending</span>
+        <strong>{{ pendingAppointments }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">check_circle</span>
+      </div>
+      <div>
+        <span>Completed</span>
+        <strong>{{ completedAppointments }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Appointment Schedule -->
+  <div class="card">
+
+    <div class="toolbar">
+      <h2>Appointment Schedule</h2>
+
+      <select
+        [(ngModel)]="selectedStatus"
+        aria-label="Filter appointments by status">
+
+        <option value="All">All</option>
+        <option value="Confirmed">Confirmed</option>
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+
+      </select>
+    </div>
+
+    <div class="table-wrapper">
+
+      <!-- Loading State -->
+      <app-empty-state
+        *ngIf="loading"
+        variant="loading"
+        icon="hourglass_empty"
+        title="Loading appointments"
+        message="Please wait while we retrieve appointment records.">
+      </app-empty-state>
+
+      <!-- Error State -->
+      <app-empty-state
+        *ngIf="!loading && errorMessage"
+        variant="error"
+        icon="error_outline"
+        title="Unable to load appointments"
+        [message]="errorMessage"
+        actionLabel="Try Again"
+        (action)="loadAppointments()">
+      </app-empty-state>
+
+      <!-- No Appointments in Database -->
+      <app-empty-state
+        *ngIf="
+          !loading &&
+          !errorMessage &&
+          appointments.length === 0
+        "
+        variant="empty"
+        icon="event_busy"
+        title="No appointments yet"
+        message="Appointments will appear here once they have been booked.">
+      </app-empty-state>
+
+      <!-- No Results for Selected Status -->
+      <app-empty-state
+        *ngIf="
+          !loading &&
+          !errorMessage &&
+          appointments.length > 0 &&
+          filteredAppointments.length === 0
+        "
+        variant="empty"
+        icon="search_off"
+        title="No matching appointments"
+        message="There are no appointments matching the selected status. Try another filter.">
+      </app-empty-state>
+
+      <!-- Appointments Table -->
+      <table
+        *ngIf="
+          !loading &&
+          !errorMessage &&
+          filteredAppointments.length > 0
+        ">
+
+        <thead>
+          <tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let appointment of filteredAppointments">
+
+            <td class="patient-name">
+              {{ appointment.patient }}
+            </td>
+
+            <td>{{ appointment.doctor }}</td>
+
+            <td>{{ appointment.service }}</td>
+
+            <td>{{ appointment.date }}</td>
+
+            <td>{{ appointment.time }}</td>
+
+            <td>
+              <span
+                class="status"
+                [class.pending]="appointment.status === 'Pending'"
+                [class.cancelled]="appointment.status === 'Cancelled'">
+
+                {{ appointment.status }}
+
+              </span>
+            </td>
+
+            <td>
+              <button
+                type="button"
+                class="icon-button"
+                aria-label="Appointment actions">
+
+                <span class="material-icons">more_vert</span>
+
+              </button>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

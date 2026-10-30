@@ -1,0 +1,544 @@
+/* =========================================================
+   PATIENT DASHBOARD
+========================================================= */
+
+.patient-page {
+  width: 100%;
+  min-height: 100vh;
+
+  background: #f7f9fc;
+
+  box-sizing: border-box;
+
+  padding-bottom: 90px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.patient-header {
+  width: 100%;
+  max-width: 1200px;
+
+  height: 80px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+
+  box-sizing: border-box;
+}
+
+.patient-header h1 {
+  margin: 0;
+
+  color: #151b2b;
+
+  font-size: 24px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   ICON BUTTON
+========================================================= */
+
+.icon-button {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #151b2b;
+
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background: #eef2f7;
+}
+
+.icon-button .material-icons {
+  font-size: 24px;
+}
+
+
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
+
+.notification {
+  position: relative;
+}
+
+.notification-dot {
+  position: absolute;
+
+  top: 7px;
+  right: 7px;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #e53935;
+
+  border: 2px solid white;
+}
+
+
+/* =========================================================
+   UPCOMING APPOINTMENT
+========================================================= */
+
+.upcoming-section {
+  width: calc(100% - 60px);
+  max-width: 1140px;
+
+  margin: 10px auto 0;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  border-radius: 18px;
+
+  background: #3478ed;
+
+  color: white;
+}
+
+.upcoming-section h2 {
+  margin: 0 0 15px;
+
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.appointment-card {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 12px;
+
+  border-radius: 14px;
+
+  background: #2864dc;
+}
+
+.appointment-date {
+  width: 70px;
+  min-width: 70px;
+
+  height: 75px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: white;
+
+  color: #1f2937;
+}
+
+.appointment-date span {
+  font-size: 12px;
+
+  color: #2864dc;
+}
+
+.appointment-date strong {
+  font-size: 28px;
+}
+
+.appointment-info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  min-width: 0;
+}
+
+.appointment-info strong {
+  font-size: 16px;
+}
+
+.appointment-info span {
+  font-size: 13px;
+}
+
+.appointment-info small {
+  font-size: 12px;
+}
+
+.details-button {
+  padding: 9px 13px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: white;
+
+  color: #2864dc;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-actions {
+  width: calc(100% - 60px);
+  max-width: 1140px;
+
+  margin: 35px auto 0;
+}
+
+.quick-actions h2 {
+  margin: 0 0 20px;
+
+  color: #151b2b;
+
+  font-size: 21px;
+}
+
+.action-grid {
+  display: grid;
+
+  grid-template-columns: repeat(6, 1fr);
+
+  gap: 16px;
+}
+
+.action-grid button {
+  min-height: 115px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 15px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: white;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.08);
+
+  color: #111827;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.action-grid button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.action-grid .material-icons {
+  font-size: 27px;
+}
+
+.action-grid button span:last-child {
+  font-size: 12px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
+
+.bottom-navigation {
+  position: fixed;
+
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 72px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  align-items: center;
+
+  background: white;
+
+  border-top: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 -3px 12px rgba(0, 0, 0, 0.05);
+
+  z-index: 1000;
+}
+
+.bottom-navigation a {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  color: #9ca3af;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.bottom-navigation .material-icons {
+  font-size: 23px;
+}
+
+.bottom-navigation a.active {
+  color: #2864dc;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1400px) {
+
+  .patient-header {
+    max-width: 1300px;
+  }
+
+  .upcoming-section,
+  .quick-actions {
+    max-width: 1240px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .action-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .patient-header {
+    height: 70px;
+
+    padding: 0 20px;
+  }
+
+  .patient-header h1 {
+    font-size: 21px;
+  }
+
+  .upcoming-section {
+    width: calc(100% - 30px);
+
+    margin-top: 5px;
+
+    padding: 17px;
+  }
+
+  .quick-actions {
+    width: calc(100% - 30px);
+
+    margin-top: 28px;
+  }
+
+  .action-grid {
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+  }
+
+  .action-grid button {
+    min-height: 100px;
+
+    padding: 10px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 550px) {
+
+  .patient-page {
+    padding-bottom: 82px;
+  }
+
+  .patient-header {
+    padding: 0 15px;
+  }
+
+  .upcoming-section {
+    width: calc(100% - 30px);
+
+    padding: 15px;
+
+    border-radius: 16px;
+  }
+
+  .appointment-card {
+    gap: 10px;
+
+    padding: 9px;
+  }
+
+  .appointment-date {
+    width: 55px;
+    min-width: 55px;
+
+    height: 68px;
+  }
+
+  .appointment-date strong {
+    font-size: 25px;
+  }
+
+  .appointment-info strong {
+    font-size: 13px;
+  }
+
+  .appointment-info span {
+    font-size: 11px;
+  }
+
+  .appointment-info small {
+    font-size: 10px;
+  }
+
+  .details-button {
+    padding: 7px 8px;
+
+    font-size: 9px;
+  }
+
+  .quick-actions {
+    width: calc(100% - 30px);
+
+    margin-top: 25px;
+  }
+
+  .quick-actions h2 {
+    font-size: 19px;
+  }
+
+  .action-grid {
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+  }
+
+  .action-grid button {
+    min-height: 95px;
+
+    border-radius: 12px;
+  }
+
+  .action-grid .material-icons {
+    font-size: 23px;
+  }
+
+  .action-grid button span:last-child {
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .appointment-card {
+    align-items: flex-start;
+  }
+
+  .details-button {
+    display: none;
+  }
+
+  .action-grid {
+    gap: 8px;
+  }
+
+  .action-grid button {
+    min-height: 90px;
+
+    padding: 7px;
+  }
+
+  .action-grid button span:last-child {
+    font-size: 8px;
+  }
+
+}

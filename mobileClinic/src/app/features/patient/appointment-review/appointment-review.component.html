@@ -1,0 +1,377 @@
+<div class="review-page">
+
+  <!-- ==========================================
+       HEADER
+  =========================================== -->
+
+  <header class="review-header">
+
+    <button
+      class="back-button"
+      type="button"
+      (click)="goBack()"
+      aria-label="Go back"
+    >
+      <span class="material-icons">
+        arrow_back
+      </span>
+    </button>
+
+    <h1>
+      Review Appointment
+    </h1>
+
+    <div class="header-spacer"></div>
+
+  </header>
+
+
+  <!-- ==========================================
+       PROGRESS STEPPER
+  =========================================== -->
+
+  <div class="progress-container">
+
+    <!-- SERVICE -->
+
+    <div class="progress-step completed">
+
+      <div class="step-circle">
+        <span class="material-icons">
+          check
+        </span>
+      </div>
+
+      <span class="step-label">
+        Service
+      </span>
+
+    </div>
+
+
+    <!-- LINE -->
+
+    <div class="progress-line completed-line"></div>
+
+
+    <!-- DOCTOR -->
+
+    <div class="progress-step completed">
+
+      <div class="step-circle">
+        <span class="material-icons">
+          check
+        </span>
+      </div>
+
+      <span class="step-label">
+        Doctor
+      </span>
+
+    </div>
+
+
+    <!-- LINE -->
+
+    <div class="progress-line completed-line"></div>
+
+
+    <!-- DATE -->
+
+    <div class="progress-step completed">
+
+      <div class="step-circle">
+        <span class="material-icons">
+          check
+        </span>
+      </div>
+
+      <span class="step-label">
+        Date
+      </span>
+
+    </div>
+
+
+    <!-- LINE -->
+
+    <div class="progress-line active-line"></div>
+
+
+    <!-- REVIEW -->
+
+    <div class="progress-step active">
+
+      <div class="step-circle">
+        4
+      </div>
+
+      <span class="step-label">
+        Review
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       INSTRUCTION
+  =========================================== -->
+
+  <div class="instruction-box">
+
+    <span class="material-icons">
+      info
+    </span>
+
+    <span>
+      Please confirm your booking details
+    </span>
+
+  </div>
+
+
+  <!-- ==========================================
+       APPOINTMENT SUMMARY
+  =========================================== -->
+
+  <main class="review-content">
+
+    <section class="appointment-card">
+
+      <div class="card-title">
+
+        <span class="material-icons">
+          event_note
+        </span>
+
+        <h2>
+          Appointment Summary
+        </h2>
+
+      </div>
+
+
+      <!-- SERVICE -->
+
+      <div class="appointment-detail">
+
+        <div class="detail-icon">
+
+          <span class="material-icons">
+            medical_services
+          </span>
+
+        </div>
+
+        <div class="detail-information">
+
+          <span class="detail-label">
+            Service
+          </span>
+
+          <strong>
+            {{ appointment.service }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- DOCTOR -->
+
+      <div class="appointment-detail">
+
+        <div class="detail-icon">
+
+          <span class="material-icons">
+            person
+          </span>
+
+        </div>
+
+        <div class="detail-information">
+
+          <span class="detail-label">
+            Doctor
+          </span>
+
+          <strong>
+            {{ appointment.doctor }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- DATE -->
+
+      <div class="appointment-detail">
+
+        <div class="detail-icon">
+
+          <span class="material-icons">
+            calendar_month
+          </span>
+
+        </div>
+
+        <div class="detail-information">
+
+          <span class="detail-label">
+            Date
+          </span>
+
+          <strong>
+            {{ appointment.date }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- TIME -->
+
+      <div class="appointment-detail">
+
+        <div class="detail-icon">
+
+          <span class="material-icons">
+            schedule
+          </span>
+
+        </div>
+
+        <div class="detail-information">
+
+          <span class="detail-label">
+            Time
+          </span>
+
+          <strong>
+            {{ appointment.time }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         CONFIRMATION NOTICE
+    =========================================== -->
+
+    <div class="confirmation-notice">
+
+      <span class="material-icons">
+        verified
+      </span>
+
+      <div>
+
+        <strong>
+          Almost there!
+        </strong>
+
+        <p>
+          Please review your appointment details
+          before confirming your booking.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="error-message" *ngIf="errorMessage" role="alert">
+      <span class="material-icons">error_outline</span>
+      {{ errorMessage }}
+    </div>
+
+    <!-- ==========================================
+         CONFIRM BUTTON
+    =========================================== -->
+
+    <button
+      class="confirm-button"
+      type="button"
+      [disabled]="submitting"
+      (click)="confirmAppointment()"
+    >
+
+      <span class="material-icons">
+        check_circle
+      </span>
+
+      {{ submitting ? 'Booking...' : 'Confirm Appointment' }}
+
+    </button>
+
+  </main>
+
+
+  <!-- ==========================================
+       MOBILE BOTTOM NAVIGATION
+  =========================================== -->
+
+  <nav class="bottom-navigation">
+
+    <a routerLink="/patient/dashboard">
+
+      <span class="material-icons">
+        home
+      </span>
+
+      <span>
+        Home
+      </span>
+
+    </a>
+
+
+    <a routerLink="/appointments">
+
+      <span class="material-icons">
+        calendar_month
+      </span>
+
+      <span>
+        Appointments
+      </span>
+
+    </a>
+
+
+    <a routerLink="/medical-records">
+
+      <span class="material-icons">
+        description
+      </span>
+
+      <span>
+        Records
+      </span>
+
+    </a>
+
+
+    <a routerLink="/profile">
+
+      <span class="material-icons">
+        person
+      </span>
+
+      <span>
+        Profile
+      </span>
+
+    </a>
+
+  </nav>
+
+</div>

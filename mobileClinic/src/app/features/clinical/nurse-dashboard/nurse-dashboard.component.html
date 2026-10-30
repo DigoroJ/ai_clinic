@@ -1,0 +1,265 @@
+<div class="clinical-page">
+
+  <!-- ===== HEADER ===== -->
+  <header class="page-top">
+
+    <div>
+      <h1>Nurse Dashboard</h1>
+      <p class="muted">
+        Welcome{{ nurseName ? ', ' + nurseName : '' }}.
+        {{ isToday ? "Today's" : '' }} patient queue for {{ dayText }}
+      </p>
+    </div>
+
+    <div class="day-picker">
+      <button type="button" aria-label="Previous day" (click)="changeDay(-1)">
+        <span class="material-icons">chevron_left</span>
+      </button>
+
+      <input
+        type="date"
+        aria-label="Choose a day"
+        [ngModel]="date"
+        (ngModelChange)="setDate($event)"
+      />
+
+      <button type="button" aria-label="Next day" (click)="changeDay(1)">
+        <span class="material-icons">chevron_right</span>
+      </button>
+
+      <button type="button" class="text-button" [disabled]="isToday" (click)="goToday()">
+        Today
+      </button>
+    </div>
+
+  </header>
+
+
+  <!-- ===== STAT CARDS ===== -->
+  <div class="stat-grid">
+
+    <div class="stat-card">
+      <span class="stat-label">Booked</span>
+      <strong>{{ bookedCount }}</strong>
+      <span class="muted">not yet arrived</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Waiting</span>
+      <strong>{{ waitingCount }}</strong>
+      <span class="muted">checked in</span>
+    </div>
+
+    <div class="stat-card danger">
+      <span class="stat-label">High priority</span>
+      <strong>{{ highPriorityCount }}</strong>
+      <span class="muted">from AI triage</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Completed</span>
+      <strong>{{ completedCount }}</strong>
+      <span class="muted">seen by doctor</span>
+    </div>
+
+  </div>
+
+
+  <div class="message error" *ngIf="error" role="alert">{{ error }}</div>
+
+
+  <div class="clinical-layout" [class.with-panel]="selected">
+
+    <!-- ===== QUEUE ===== -->
+    <section class="card">
+
+      <div class="card-title">
+        <h2>Patient queue</h2>
+        <button type="button" class="text-button" (click)="loadQueue()" [disabled]="loading">
+          <span class="material-icons">refresh</span> Refresh
+        </button>
+      </div>
+
+      <p class="muted pad" *ngIf="loading && queue.length === 0">Loading queue...</p>
+
+      <p class="muted pad" *ngIf="!loading && !error && queue.length === 0">
+        No appointments for this day.
+      </p>
+
+      <div class="table-wrap" *ngIf="queue.length > 0">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Patient</th>
+              <th>Doctor / Service</th>
+              <th>AI triage</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              *ngFor="let item of queue; trackBy: trackById"
+              [class.active]="selected?.id === item.id"
+              (click)="select(item)"
+            >
+              <td class="nowrap">{{ shortTime(item.appointment_time) }}</td>
+
+              <td>
+                <strong>{{ item.patient }}</strong>
+                <span class="sub" *ngIf="item.patient_phone">{{ item.patient_phone }}</span>
+              </td>
+
+              <td>
+                {{ item.doctor }}
+                <span class="sub">{{ item.service }}</span>
+              </td>
+
+              <td>
+                <ng-container *ngIf="item.predicted_disease; else noAi">
+                  {{ item.predicted_disease }}
+                  <span class="sub">{{ percent(item.confidence) }}% confidence</span>
+                  <span class="badge" [ngClass]="priorityClass(item.priority)">
+                    {{ item.priority || 'n/a' }}
+                  </span>
+                </ng-container>
+                <ng-template #noAi><span class="muted">No symptom check yet</span></ng-template>
+              </td>
+
+              <td>
+                <span class="chip" [ngClass]="item.status.toLowerCase()">
+                  {{ statusLabel(item.status) }}
+                </span>
+                <span class="sub" *ngIf="item.assessment_id">Vitals taken</span>
+              </td>
+
+              <td class="actions">
+                <button
+                  type="button"
+                  class="small-button"
+                  *ngIf="item.status === 'Pending'"
+                  (click)="checkIn(item, $event)"
+                >
+                  Check in
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+
+    <!-- ===== PATIENT PANEL ===== -->
+    <aside class="card panel" *ngIf="selected">
+
+      <div class="card-title">
+        <div>
+          <h2>{{ selected.patient }}</h2>
+          <span class="muted">
+            {{ shortTime(selected.appointment_time) }} · {{ selected.service }} ·
+            {{ statusLabel(selected.status) }}
+          </span>
+        </div>
+
+        <button type="button" class="icon-only" aria-label="Close" (click)="closePanel()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <p class="muted pad" *ngIf="summaryLoading">Loading patient details...</p>
+
+      <!-- AI predictions -->
+      <ng-container *ngIf="summary">
+
+        <h3>Latest AI predictions</h3>
+
+        <p class="muted" *ngIf="summary.predictions.length === 0">
+          The patient has not used the symptom checker yet.
+        </p>
+
+        <ul class="plain-list" *ngIf="summary.predictions.length > 0">
+          <li *ngFor="let p of summary.predictions | slice:0:3">
+            <strong>{{ p.predicted_disease }}</strong>
+            <span class="sub">
+              {{ percent(p.confidence) }}% · {{ p.created_at | date:'d MMM, HH:mm' }}
+            </span>
+            <span class="badge" [ngClass]="priorityClass(p.priority)">{{ p.priority || 'n/a' }}</span>
+          </li>
+        </ul>
+
+        <p class="hint">
+          AI decision support only. It is not a diagnosis.
+        </p>
+
+        <h3>Previous vitals</h3>
+
+        <p class="muted" *ngIf="summary.assessments.length === 0">None recorded.</p>
+
+        <ul class="plain-list" *ngIf="summary.assessments.length > 0">
+          <li *ngFor="let a of summary.assessments | slice:0:2">
+            <span>
+              <ng-container *ngIf="a.temperature">{{ a.temperature }} °C · </ng-container>
+              <ng-container *ngIf="a.blood_pressure">BP {{ a.blood_pressure }} · </ng-container>
+              <ng-container *ngIf="a.pulse">{{ a.pulse }} bpm · </ng-container>
+              <ng-container *ngIf="a.weight">{{ a.weight }} kg</ng-container>
+            </span>
+            <span class="sub">{{ a.nurse }} · {{ a.created_at | date:'d MMM, HH:mm' }}</span>
+          </li>
+        </ul>
+
+      </ng-container>
+
+
+      <!-- Assessment form -->
+      <h3>Record assessment</h3>
+
+      <form (ngSubmit)="saveAssessment()" class="form-grid">
+
+        <label>
+          Temperature (°C)
+          <input type="number" step="0.1" min="30" max="45" name="temperature"
+                 [(ngModel)]="assessment.temperature" />
+        </label>
+
+        <label>
+          Blood pressure
+          <input type="text" name="bp" placeholder="120/80" maxlength="7"
+                 [(ngModel)]="assessment.blood_pressure" />
+        </label>
+
+        <label>
+          Pulse (bpm)
+          <input type="number" min="20" max="250" name="pulse"
+                 [(ngModel)]="assessment.pulse" />
+        </label>
+
+        <label>
+          Weight (kg)
+          <input type="number" step="0.1" min="1" max="500" name="weight"
+                 [(ngModel)]="assessment.weight" />
+        </label>
+
+        <label class="wide">
+          Notes
+          <textarea rows="3" name="notes" maxlength="2000"
+                    [(ngModel)]="assessment.notes"></textarea>
+        </label>
+
+        <div class="message error wide" *ngIf="saveError" role="alert">{{ saveError }}</div>
+        <div class="message success wide" *ngIf="saveMessage" role="status">{{ saveMessage }}</div>
+
+        <button type="submit" class="primary-button wide" [disabled]="saving">
+          {{ saving ? 'Saving...' : 'Save assessment' }}
+        </button>
+
+      </form>
+
+    </aside>
+
+  </div>
+
+</div>

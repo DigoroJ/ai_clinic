@@ -1,0 +1,111 @@
+
+<div *ngIf="loading" class="card">
+  <app-empty-state
+    variant="loading"
+    icon="hourglass_empty"
+    title="Loading AI analytics"
+    message="Retrieving model performance results.">
+  </app-empty-state>
+</div>
+
+<div *ngIf="!loading && errorMessage" class="card">
+  <app-empty-state
+    variant="error"
+    icon="error_outline"
+    title="Unable to load AI analytics"
+    [message]="errorMessage"
+    actionLabel="Try Again"
+    (action)="loadAnalytics()">
+  </app-empty-state>
+</div>
+
+<ng-container *ngIf="!loading && !errorMessage">
+
+  <div class="analytics-grid">
+
+    <div class="analytics-card">
+      <span class="material-icons">model_training</span>
+      <span>Best Model</span>
+      <strong>{{ bestModel || 'Not available' }}</strong>
+    </div>
+
+    <div class="analytics-card">
+      <span class="material-icons">trending_up</span>
+      <span>Best Accuracy</span>
+      <strong>
+        {{ bestAccuracy !== null
+          ? (bestAccuracy | number:'1.1-2') + '%'
+          : '—' }}
+      </strong>
+    </div>
+
+    <div class="analytics-card">
+      <span class="material-icons">dataset</span>
+      <span>Training Records</span>
+      <strong>
+        {{ trainingRecords !== null
+          ? (trainingRecords | number)
+          : '—' }}
+      </strong>
+    </div>
+
+    <div class="analytics-card">
+      <span class="material-icons">psychology</span>
+      <span>Predictions</span>
+      <strong>
+        {{ predictions !== null
+          ? (predictions | number)
+          : '—' }}
+      </strong>
+    </div>
+
+  </div>
+
+  <div class="card" *ngIf="models.length > 0">
+    <div class="card-title">
+      <h2>Model Comparison</h2>
+      <p>Performance of the trained machine learning algorithms.</p>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Accuracy</th>
+            <th>Precision</th>
+            <th>Recall</th>
+            <th>Performance</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let model of models">
+            <td class="model-name">{{ model.name }}</td>
+            <td>{{ model.accuracy | number:'1.1-2' }}%</td>
+            <td>{{ model.precision | number:'1.1-2' }}%</td>
+            <td>{{ model.recall | number:'1.1-2' }}%</td>
+
+            <td>
+              <div class="progress">
+                <div
+                  class="progress-value"
+                  [style.width.%]="model.accuracy">
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <app-empty-state
+    *ngIf="models.length === 0"
+    variant="empty"
+    icon="analytics"
+    title="No model results available"
+    message="Train and evaluate your models to display comparisons.">
+  </app-empty-state>
+
+</ng-container>

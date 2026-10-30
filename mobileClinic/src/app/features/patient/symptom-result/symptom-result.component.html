@@ -1,0 +1,278 @@
+<div class="results-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <button class="back-btn" routerLink="/patient/symptom-checker" aria-label="Go back">
+      <span>‹</span>
+    </button>
+
+    <div class="header-content">
+      <span class="eyebrow">SYMPTOM CHECKER</span>
+      <h1>AI Assessment Results</h1>
+      <p>
+        Your symptoms have been analyzed. Review the assessment
+        and recommended next steps.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- Main Content -->
+  <div class="results-container">
+
+    <!-- Assessment Summary -->
+    <section class="assessment-card">
+
+      <div class="assessment-left">
+
+        <div class="success-icon">
+          ✓
+        </div>
+
+        <div>
+          <span class="status-label">ASSESSMENT COMPLETE</span>
+
+          <h2>Your assessment is ready</h2>
+
+          <p *ngIf="result">
+            The AI model's most likely prediction is
+            <strong>{{ result?.prediction }}</strong>.
+            Triage priority: <strong>{{ result?.priority || 'n/a' }}</strong>.
+            This is preliminary decision support, not a diagnosis.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="confidence-box">
+
+        <span>AI CONFIDENCE</span>
+
+        <strong>{{ confidencePct }}%</strong>
+
+        <div class="confidence-bar">
+          <div class="confidence-progress" [style.width.%]="confidencePct"></div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Two Column Layout -->
+    <div class="results-grid">
+
+      <!-- Left Column -->
+      <div class="results-column">
+
+        <!-- Possible Conditions -->
+        <section class="content-card">
+
+          <div class="card-heading">
+            <div>
+              <span class="section-label">ASSESSMENT</span>
+              <h2>Possible Conditions</h2>
+            </div>
+          </div>
+
+
+          <div class="condition-list">
+
+            <div
+              class="condition-item"
+              *ngFor="let condition of conditions; let i = index">
+
+              <div class="condition-number">0{{ i + 1 }}</div>
+
+              <div class="condition-info">
+                <h3>{{ condition.name }}</h3>
+                <p>
+                  The model estimates a {{ condition.percent }}% likelihood
+                  based on the information you entered.
+                </p>
+              </div>
+
+              <span class="severity" [ngClass]="condition.level">
+                {{ condition.percent }}%
+              </span>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- Recommended Actions -->
+        <section class="content-card">
+
+          <div class="card-heading">
+            <span class="section-label">NEXT STEPS</span>
+            <h2>Recommended Actions</h2>
+          </div>
+
+
+          <div class="recommendations">
+
+            <div class="recommendation-item">
+
+              <div class="recommendation-icon">
+                💧
+              </div>
+
+              <div>
+                <h3>Stay hydrated</h3>
+                <p>
+                  Drink plenty of water and other fluids throughout the day.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="recommendation-item">
+
+              <div class="recommendation-icon">
+                🛌
+              </div>
+
+              <div>
+                <h3>Get plenty of rest</h3>
+                <p>
+                  Give your body enough time to recover.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="recommendation-item">
+
+              <div class="recommendation-icon">
+                👨‍⚕️
+              </div>
+
+              <div>
+                <h3>Consider seeing a doctor</h3>
+                <p>
+                  A healthcare professional can provide a proper diagnosis.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+
+      <!-- Right Column -->
+      <div class="results-column">
+
+        <!-- Urgent Care -->
+        <section class="warning-card">
+
+          <div class="warning-icon">
+            !
+          </div>
+
+          <div>
+            <span class="warning-label">IMPORTANT</span>
+
+            <h2>When to seek urgent care</h2>
+
+            <p>
+              Seek immediate medical attention if you experience
+              difficulty breathing, severe chest pain, confusion,
+              fainting, or symptoms that suddenly become worse.
+            </p>
+          </div>
+
+        </section>
+
+
+        <!-- Appointment CTA -->
+        <section class="action-card">
+
+          <div class="action-icon">
+            🩺
+          </div>
+
+          <h2>Speak to a healthcare professional</h2>
+
+          <p>
+            An AI assessment cannot replace a professional medical
+            diagnosis. Book an appointment if you would like
+            your symptoms assessed by a doctor.
+          </p>
+
+          <button
+            class="primary-btn"
+            routerLink="/patient/book-appointment">
+
+            Book an Appointment
+
+            <span>→</span>
+
+          </button>
+
+          <button
+            class="secondary-btn"
+            routerLink="/patient/symptom-checker">
+
+            Check symptoms again
+
+          </button>
+
+        </section>
+
+      </div>
+
+    </div>
+
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+
+      <span>ⓘ</span>
+
+      <p>
+        This assessment is for informational purposes only and does
+        not replace professional medical advice, diagnosis or treatment.
+      </p>
+
+    </div>
+
+  </div>
+
+ <!-- Bottom Navigation -->
+<nav class="mobile-bottom-nav">
+
+    <a routerLink="/patient/dashboard">
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </a>
+
+    <a routerLink="/patient/appointments">
+      <span class="material-icons">event</span>
+      <span>Appointments</span>
+    </a>
+
+    <a routerLink="/patient/records">
+      <span class="material-icons">description</span>
+      <span>Records</span>
+    </a>
+
+    <a routerLink="/patient/profile">
+      <span class="material-icons">person</span>
+      <span>Profile</span>
+    </a>
+
+  </nav>
+
+</div>

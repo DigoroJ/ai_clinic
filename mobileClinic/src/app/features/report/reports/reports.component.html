@@ -1,0 +1,129 @@
+<div class="page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Reports</h1>
+      <p>Generate and view mobile clinic reports.</p>
+    </div>
+
+    <button class="primary-button">
+      <span class="material-icons">add_chart</span>
+      Generate Report
+    </button>
+
+  </div>
+
+  <div class="report-grid">
+
+    <div class="report-card">
+
+      <span class="material-icons">
+        assessment
+      </span>
+
+      <h3>Clinic Performance</h3>
+
+      <p>
+        View appointments, patients and service activity.
+      </p>
+
+      <button>
+        Generate
+      </button>
+
+    </div>
+
+    <div class="report-card">
+
+      <span class="material-icons">
+        psychology
+      </span>
+
+      <h3>AI Performance</h3>
+
+      <p>
+        View machine learning model performance.
+      </p>
+
+      <button>
+        Generate
+      </button>
+
+    </div>
+
+    <div class="report-card">
+
+      <span class="material-icons">
+        groups
+      </span>
+
+      <h3>Patient Demographics</h3>
+
+      <p>
+        Analyse patient demographics and service usage.
+      </p>
+
+      <button>
+        Generate
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <h2>Recent Reports</h2>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Report</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let report of reports">
+
+            <td class="patient-name">
+              {{ report.name }}
+            </td>
+
+            <td>{{ report.type }}</td>
+
+            <td>{{ report.date }}</td>
+
+            <td>
+              <span class="status">
+                {{ report.status }}
+              </span>
+            </td>
+
+            <td>
+              <button class="icon-button">
+                <span class="material-icons">
+                  download
+                </span>
+              </button>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

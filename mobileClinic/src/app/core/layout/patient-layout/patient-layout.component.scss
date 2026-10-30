@@ -1,0 +1,307 @@
+.patient-page {
+  width: 100%;
+  max-width: 430px;
+
+  min-height: 100vh;
+
+  margin: 0 auto;
+
+  background: #f7f9fc;
+
+  position: relative;
+
+  box-sizing: border-box;
+
+  padding-bottom: 80px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.patient-header {
+  height: 80px;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  box-sizing: border-box;
+}
+
+.patient-header h1 {
+  margin: 0;
+
+  font-size: 21px;
+
+  color: #151b2b;
+}
+
+.icon-button {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.icon-button .material-icons {
+  font-size: 26px;
+}
+
+.notification {
+  position: relative;
+}
+
+.notification-dot {
+  position: absolute;
+
+  top: 7px;
+  right: 7px;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #e53935;
+}
+
+
+/* =====================================================
+   UPCOMING APPOINTMENT
+===================================================== */
+
+.upcoming-section {
+  margin: 10px 15px 0;
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  background: #3478ed;
+
+  color: white;
+}
+
+.upcoming-section h2 {
+  margin: 0 0 12px;
+
+  font-size: 16px;
+
+  font-weight: 500;
+}
+
+.appointment-card {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px;
+
+  border-radius: 12px;
+
+  background: #2864dc;
+}
+
+.appointment-date {
+  width: 60px;
+  min-width: 60px;
+
+  height: 72px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: white;
+
+  color: #1f2937;
+}
+
+.appointment-date span {
+  font-size: 12px;
+
+  color: #2864dc;
+}
+
+.appointment-date strong {
+  font-size: 28px;
+}
+
+.appointment-info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.appointment-info strong {
+  font-size: 15px;
+}
+
+.appointment-info span {
+  font-size: 12px;
+}
+
+.appointment-info small {
+  font-size: 11px;
+}
+
+.details-button {
+  padding: 8px 10px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: white;
+
+  color: #2864dc;
+
+  font-size: 10px;
+
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.quick-actions {
+  padding: 30px 15px 20px;
+}
+
+.quick-actions h2 {
+  margin: 0 0 18px;
+
+  color: #151b2b;
+
+  font-size: 19px;
+}
+
+.action-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 14px;
+}
+
+.action-grid button {
+  min-height: 105px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 10px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: white;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.08);
+
+  cursor: pointer;
+
+  color: #111827;
+}
+
+.action-grid .material-icons {
+  font-size: 25px;
+}
+
+.action-grid button span:last-child {
+  font-size: 11px;
+
+  text-align: center;
+}
+
+
+/* =====================================================
+   BOTTOM NAVIGATION
+===================================================== */
+
+.bottom-navigation {
+  position: fixed;
+
+  bottom: 0;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 100%;
+
+  max-width: 430px;
+
+  height: 70px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  align-items: center;
+
+  background: white;
+
+  border-top: 1px solid #e5e7eb;
+
+  z-index: 1000;
+}
+
+.bottom-navigation a {
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  color: #9ca3af;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.bottom-navigation .material-icons {
+  font-size: 23px;
+}
+
+.bottom-navigation a.active {
+  color: #2864dc;
+}

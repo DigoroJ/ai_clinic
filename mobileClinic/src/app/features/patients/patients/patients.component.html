@@ -1,0 +1,173 @@
+
+<div class="page">
+
+  <div class="page-header">
+    <div>
+      <h1>Patients</h1>
+      <p>Manage registered mobile clinic patients.</p>
+    </div>
+
+    <button class="primary-button" type="button">
+      <span class="material-icons">person_add</span>
+      Add Patient
+    </button>
+  </div>
+
+  <!-- Statistics -->
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">people</span>
+      </div>
+      <div>
+        <span>Total Patients</span>
+        <strong>{{ patients.length }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">person</span>
+      </div>
+      <div>
+        <span>Active Patients</span>
+        <strong>{{ activePatientsCount }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">update</span>
+      </div>
+      <div>
+        <span>Follow-ups</span>
+        <strong>{{ followUpCount }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <!-- Search and Filter -->
+    <div class="toolbar">
+
+      <div class="search-box">
+        <span class="material-icons">search</span>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Search patients..."
+          aria-label="Search patients">
+      </div>
+
+      <select
+        [(ngModel)]="selectedStatus"
+        aria-label="Filter patients by status">
+        <option value="All">All</option>
+        <option value="Active">Active</option>
+        <option value="Follow-up">Follow-up</option>
+      </select>
+
+    </div>
+
+    <!-- Loading State -->
+    <app-empty-state
+      *ngIf="loading"
+      variant="loading"
+      icon="hourglass_top"
+      title="Loading patients"
+      message="Please wait while we retrieve patient records.">
+    </app-empty-state>
+
+    <!-- Error State -->
+    <app-empty-state
+      *ngIf="!loading && errorMessage"
+      variant="error"
+      icon="cloud_off"
+      title="Unable to load patients"
+      [message]="errorMessage"
+      actionLabel="Try again"
+      (action)="loadPatients()">
+    </app-empty-state>
+
+    <!-- Patients Table -->
+    <div
+      class="table-wrapper"
+      *ngIf="!loading && !errorMessage && filteredPatients.length > 0">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Patient</th>
+            <th>ID</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Phone</th>
+            <th>Last Visit</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let patient of filteredPatients">
+
+            <td class="patient-name">
+              <div class="avatar">
+                {{ patient.name.charAt(0) || '?' }}
+              </div>
+              {{ patient.name }}
+            </td>
+
+            <td>{{ patient.id }}</td>
+            <td>{{ patient.age }}</td>
+            <td>{{ patient.gender }}</td>
+            <td>{{ patient.phone }}</td>
+            <td>{{ patient.lastVisit }}</td>
+
+            <td>
+              <span
+                class="status"
+                [class.follow-up]="patient.status === 'Follow-up'">
+                {{ patient.status }}
+              </span>
+            </td>
+
+            <td>
+              <button
+                class="icon-button"
+                type="button"
+                [attr.aria-label]="'Actions for ' + patient.name">
+                <span class="material-icons">more_vert</span>
+              </button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- Empty State -->
+    <app-empty-state
+      *ngIf="!loading && !errorMessage && patients.length === 0"
+      variant="empty"
+      icon="people"
+      title="No patients registered"
+      message="Patient records will appear here once they are available.">
+    </app-empty-state>
+
+    <!-- Search Has No Matches -->
+    <app-empty-state
+      *ngIf="!loading && !errorMessage && patients.length > 0 && filteredPatients.length === 0"
+      variant="empty"
+      icon="person_search"
+      title="No patients found"
+      message="Try changing your search or status filter.">
+    </app-empty-state>
+
+  </div>
+
+</div>

@@ -1,0 +1,182 @@
+<div class="page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Settings</h1>
+      <p>Manage system configuration and preferences.</p>
+    </div>
+
+    <button
+      class="primary-button"
+      (click)="saveSettings()">
+
+      <span class="material-icons">
+        save
+      </span>
+
+      Save Changes
+
+    </button>
+
+  </div>
+
+  <div class="settings-grid">
+
+    <!-- System -->
+
+    <div class="card">
+
+      <div class="card-title">
+
+        <span class="material-icons">
+          settings
+        </span>
+
+        <div>
+          <h2>System Settings</h2>
+          <p>General application configuration.</p>
+        </div>
+
+      </div>
+
+      <div class="setting-row">
+
+        <div>
+          <strong>System Name</strong>
+          <span>Mobile Clinic Management System</span>
+        </div>
+
+      </div>
+
+      <div class="setting-row">
+
+        <div>
+          <strong>System Status</strong>
+          <span>Online</span>
+        </div>
+
+        <span class="online">
+          <span class="status-dot"></span>
+          Online
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Notifications -->
+
+    <div class="card">
+
+      <div class="card-title">
+
+        <span class="material-icons">
+          notifications
+        </span>
+
+        <div>
+          <h2>Notifications</h2>
+          <p>Manage system notifications.</p>
+        </div>
+
+      </div>
+
+      <div class="setting-row">
+
+        <div>
+          <strong>System Notifications</strong>
+          <span>Receive important system alerts.</span>
+        </div>
+
+        <label class="switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="notifications">
+
+          <span></span>
+        </label>
+
+      </div>
+
+      <div class="setting-row">
+
+        <div>
+          <strong>Email Notifications</strong>
+          <span>Receive notifications by email.</span>
+        </div>
+
+        <label class="switch">
+          <input
+            type="checkbox"
+            [(ngModel)]="emailNotifications">
+
+          <span></span>
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <!-- AI -->
+
+    <div class="card">
+
+      <div class="card-title">
+
+        <span class="material-icons">
+          psychology
+        </span>
+
+        <div>
+          <h2>AI Configuration</h2>
+          <p>Manage AI decision-support features.</p>
+        </div>
+
+      </div>
+
+      <div class="setting-row">
+
+        <div>
+          <strong>AI Predictions</strong>
+          <span>Enable AI-assisted predictions.</span>
+        </div>
+
+        <label class="switch">
+
+          <input
+            type="checkbox"
+            [(ngModel)]="aiPredictions">
+
+          <span></span>
+
+        </label>
+
+      </div>
+
+      <div class="setting-row">
+
+        <div>
+          <strong>Automatic Reports</strong>
+          <span>Automatically generate analytics reports.</span>
+        </div>
+
+        <label class="switch">
+
+          <input
+            type="checkbox"
+            [(ngModel)]="automaticReports">
+
+          <span></span>
+
+        </label>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

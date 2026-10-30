@@ -1,0 +1,160 @@
+<div class="confirmation-page">
+
+  <!-- Progress -->
+  <app-appointment-progress
+    [currentStep]="5">
+  </app-appointment-progress>
+
+  <main class="confirmation-content">
+
+    <!-- Success Icon -->
+    <div class="success-icon">
+      <span class="material-icons">check</span>
+    </div>
+
+    <!-- Heading -->
+    <h1>Appointment Confirmed!</h1>
+
+    <p class="confirmation-message">
+      Your appointment has been successfully booked.
+      We look forward to seeing you.
+    </p>
+
+    <!-- Appointment Card -->
+    <section class="appointment-card">
+
+      <div class="card-header">
+        <div>
+          <span class="material-icons">event_available</span>
+          <div>
+            <h2>Appointment Details</h2>
+            <p>Booking confirmed</p>
+          </div>
+        </div>
+
+        <span class="status-badge">
+          Confirmed
+        </span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="appointment-details">
+
+        <!-- Service -->
+        <div class="detail-item">
+          <span class="material-icons">medical_services</span>
+
+          <div>
+            <span class="detail-label">Service</span>
+            <strong>{{ appointment.service || 'General Consultation' }}</strong>
+          </div>
+        </div>
+
+        <!-- Doctor -->
+        <div class="detail-item">
+          <span class="material-icons">person</span>
+
+          <div>
+            <span class="detail-label">Healthcare Provider</span>
+            <strong>{{ appointment.doctor || 'Selected Doctor' }}</strong>
+
+            <small *ngIf="appointment.specialty">
+              {{ appointment.specialty }}
+            </small>
+          </div>
+        </div>
+
+        <!-- Date -->
+        <div class="detail-item">
+          <span class="material-icons">calendar_today</span>
+
+          <div>
+            <span class="detail-label">Date</span>
+            <strong>{{ appointment.date || 'Appointment Date' }}</strong>
+          </div>
+        </div>
+
+        <!-- Time -->
+        <div class="detail-item">
+          <span class="material-icons">schedule</span>
+
+          <div>
+            <span class="detail-label">Time</span>
+            <strong>{{ appointment.time || 'Appointment Time' }}</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Reference -->
+      <div class="booking-reference">
+        <span>Booking Reference</span>
+        <strong>MC-{{ appointment.date | date:'yyyyMMdd' }}-001</strong>
+      </div>
+
+    </section>
+
+    <!-- Notification -->
+    <div class="notification">
+      <span class="material-icons">notifications</span>
+
+      <div>
+        <strong>Appointment reminder</strong>
+        <p>
+          You will receive a reminder before your appointment.
+        </p>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="confirmation-actions">
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="goToDashboard()">
+        <span class="material-icons">dashboard</span>
+        Go to Dashboard
+      </button>
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="viewAppointments()">
+        <span class="material-icons">event</span>
+        View My Appointments
+      </button>
+
+      <button
+        type="button"
+        class="text-button"
+        (click)="bookAnotherAppointment()">
+        Book Another Appointment
+      </button>
+
+    </div>
+
+  </main>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+
+    <a routerLink="/patient/dashboard">
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </a>
+
+    <a routerLink="/patient/appointments">
+      <span class="material-icons">event</span>
+      <span>Appointments</span>
+    </a>
+
+    <a routerLink="/patient/profile">
+      <span class="material-icons">person</span>
+      <span>Profile</span>
+    </a>
+
+  </nav>
+
+</div>

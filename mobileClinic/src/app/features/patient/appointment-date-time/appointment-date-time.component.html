@@ -1,0 +1,353 @@
+<div class="date-time-page">
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="date-time-header">
+
+    <button
+      type="button"
+      class="back-button"
+      routerLink="/patient/select-doctor"
+      aria-label="Go back"
+    >
+      <span class="material-icons">
+        arrow_back_ios
+      </span>
+    </button>
+
+    <h1>Select Date &amp; Time</h1>
+
+    <div class="header-spacer"></div>
+
+  </header>
+
+
+  <!-- =====================================================
+       PROGRESS
+  ====================================================== -->
+
+  <app-appointment-progress
+    [currentStep]="3">
+  </app-appointment-progress>
+
+
+  <!-- =====================================================
+       MAIN CONTENT
+  ====================================================== -->
+
+  <main class="date-time-content">
+
+
+    <!-- INSTRUCTION -->
+
+    <div class="instruction-box">
+
+      <span class="material-icons">
+        calendar_month
+      </span>
+
+      <span>
+        Choose an available appointment slot
+      </span>
+
+    </div>
+
+
+    <!-- ===================================================
+         DATE + TIME
+    ==================================================== -->
+
+    <div class="booking-selection">
+
+
+      <!-- =================================================
+           CALENDAR
+      ================================================== -->
+
+      <section class="calendar-section">
+
+        <div class="section-title">
+
+          <div>
+            <h2>Select Date</h2>
+
+            <p>
+              Available dates start tomorrow
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="calendar-card">
+
+
+          <!-- MONTH HEADER -->
+
+          <div class="calendar-header">
+
+            <button
+              type="button"
+              class="month-button"
+              (click)="previousMonth()"
+              [disabled]="!canGoPrevious()"
+              aria-label="Previous month"
+            >
+              <span class="material-icons">
+                chevron_left
+              </span>
+            </button>
+
+
+            <h3>
+              {{ monthName }}
+              {{ displayedYear }}
+            </h3>
+
+
+            <button
+              type="button"
+              class="month-button"
+              (click)="nextMonth()"
+              aria-label="Next month"
+            >
+              <span class="material-icons">
+                chevron_right
+              </span>
+            </button>
+
+          </div>
+
+
+          <!-- WEEK DAYS -->
+
+          <div class="weekdays">
+
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+            <span>Sun</span>
+
+          </div>
+
+
+          <!-- CALENDAR -->
+
+          <div class="calendar-grid">
+
+            <button
+              *ngFor="let day of calendarDays"
+              type="button"
+              class="calendar-day"
+              [class.empty]="day === null"
+              [class.disabled]="day !== null && !isDateSelectable(day)"
+              [class.selected]="day !== null && isSelectedDay(day)"
+              [disabled]="day === null || !isDateSelectable(day)"
+              (click)="selectDay(day)"
+            >
+
+              <span *ngIf="day !== null">
+                {{ day }}
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           TIME SLOTS
+      ================================================== -->
+
+      <section
+        class="time-section"
+        [class.disabled-section]="!selectedDate"
+      >
+
+        <div class="section-title">
+
+          <div>
+
+            <h2>
+              Available Time
+            </h2>
+
+            <p *ngIf="!selectedDate">
+              Select a date first
+            </p>
+
+            <p *ngIf="selectedDate">
+              Available slots for {{ formattedSelectedDate }}
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- LOCKED STATE -->
+
+        <div
+          class="time-disabled-message"
+          *ngIf="!selectedDate"
+        >
+
+          <span class="material-icons">
+            lock
+          </span>
+
+          <p>
+            Please select a date<br>
+            to view available times.
+          </p>
+
+        </div>
+
+
+        <!-- TIME SLOTS -->
+
+        <div
+          class="time-slots"
+          *ngIf="selectedDate"
+        >
+
+          <button
+            *ngFor="let time of availableTimes"
+            type="button"
+            class="time-slot"
+            [class.selected]="selectedTime === time"
+            (click)="selectTime(time)"
+          >
+
+            {{ time }}
+
+          </button>
+
+        </div>
+
+
+        <!-- SELECTED TIME -->
+
+        <div
+          class="selected-time"
+          *ngIf="selectedDate && selectedTime"
+        >
+
+          <span class="material-icons">
+            event_available
+          </span>
+
+          <div>
+
+            <small>
+              Appointment selected
+            </small>
+
+            <strong>
+              {{ formattedSelectedDate }}
+            </strong>
+
+            <span>
+              {{ selectedTime }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- ===================================================
+         CONTINUE
+    ==================================================== -->
+
+    <button
+      type="button"
+      class="continue-button"
+      [disabled]="!selectedDate || !selectedTime"
+      (click)="continue()"
+    >
+
+      Continue
+
+    </button>
+
+
+  </main>
+
+
+  <!-- =====================================================
+       BOTTOM NAVIGATION
+  ====================================================== -->
+
+  <nav class="bottom-navigation">
+
+    <a routerLink="/patient/dashboard">
+
+      <span class="material-icons">
+        home
+      </span>
+
+      <span>
+        Home
+      </span>
+
+    </a>
+
+
+    <a
+      class="active"
+      routerLink="/patient/book-appointment"
+    >
+
+      <span class="material-icons">
+        calendar_month
+      </span>
+
+      <span>
+        Appointments
+      </span>
+
+    </a>
+
+
+    <a>
+
+      <span class="material-icons">
+        description
+      </span>
+
+      <span>
+        Records
+      </span>
+
+    </a>
+
+
+    <a>
+
+      <span class="material-icons">
+        person
+      </span>
+
+      <span>
+        Profile
+      </span>
+
+    </a>
+
+  </nav>
+
+</div>

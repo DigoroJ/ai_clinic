@@ -1,0 +1,142 @@
+<div class="booking-page">
+
+  <!-- HEADER -->
+  <header class="booking-header">
+
+    <button
+      type="button"
+      class="back-button"
+      routerLink="/patient/dashboard"
+      aria-label="Go back to dashboard"
+    >
+      <span class="material-icons">
+        arrow_back_ios
+      </span>
+    </button>
+
+    <h1>Book Appointment</h1>
+
+  </header>
+
+
+  <!-- PROGRESS -->
+  <app-appointment-progress [currentStep]="1">
+  </app-appointment-progress>
+
+
+  <!-- SERVICES -->
+  <section class="services">
+
+    <h2>Select a service</h2>
+
+    <!-- LOADING -->
+    <p *ngIf="loading">
+      Loading services...
+    </p>
+
+    <!-- ERROR -->
+    <div *ngIf="error" role="alert">
+      <p>{{ error }}</p>
+
+      <button
+        type="button"
+        (click)="loadServices()"
+      >
+        Try Again
+      </button>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <p *ngIf="!loading && !error && services.length === 0">
+      No services are currently available.
+    </p>
+
+    <!-- DYNAMIC SERVICE CARDS -->
+    <button
+      *ngFor="let service of services"
+      type="button"
+      class="service-card"
+      [class.selected]="selectedServiceId === service.id"
+      [attr.aria-pressed]="selectedServiceId === service.id"
+      (click)="selectService(service)"
+    >
+
+      <div class="service-icon">
+
+        <span class="material-icons">
+          {{
+            service.name.toLowerCase().includes('pediatric')
+              ? 'child_care'
+              : service.name.toLowerCase().includes('women')
+              ? 'favorite'
+              : service.name.toLowerCase().includes('mental')
+              ? 'psychology'
+              : service.name.toLowerCase().includes('chronic')
+              ? 'medical_services'
+              : 'local_hospital'
+          }}
+        </span>
+
+      </div>
+
+      <div>
+        <strong>{{ service.name }}</strong>
+
+        <span>
+          {{ service.description || 'Clinic healthcare service' }}
+        </span>
+      </div>
+
+      <span class="material-icons arrow">
+        {{
+          selectedServiceId === service.id
+            ? 'check_circle'
+            : 'chevron_right'
+        }}
+      </span>
+
+    </button>
+
+  </section>
+
+
+  <!-- CONTINUE -->
+  <button
+    class="continue-button"
+    type="button"
+    [disabled]="loading || services.length === 0 || selectedServiceId === null"
+    (click)="continue()"
+  >
+    Continue
+  </button>
+
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-navigation">
+
+    <a
+      class="active"
+      routerLink="/patient/dashboard"
+    >
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </a>
+
+    <a routerLink="/patient/book-appointment">
+      <span class="material-icons">calendar_month</span>
+      <span>Appointments</span>
+    </a>
+
+    <a routerLink="/patient/medical-records">
+      <span class="material-icons">description</span>
+      <span>Records</span>
+    </a>
+
+    <a routerLink="/patient/profile">
+      <span class="material-icons">person</span>
+      <span>Profile</span>
+    </a>
+
+  </nav>
+
+</div>

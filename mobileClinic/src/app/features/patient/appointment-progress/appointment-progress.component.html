@@ -1,0 +1,146 @@
+<div class="appointment-progress">
+
+  <!-- SERVICE -->
+
+  <div
+    class="progress-step"
+    [class.active]="currentStep === 1"
+    [class.completed]="currentStep > 1"
+  >
+
+    <div class="step-circle">
+
+      <span
+        *ngIf="currentStep > 1"
+        class="material-icons"
+      >
+        check
+      </span>
+
+      <span *ngIf="currentStep === 1">
+        1
+      </span>
+
+    </div>
+
+    <span class="step-label">
+      Service
+    </span>
+
+  </div>
+
+
+  <!-- LINE -->
+
+  <div
+    class="progress-line"
+    [class.completed-line]="currentStep > 1"
+  ></div>
+
+
+  <!-- DOCTOR -->
+
+  <div
+    class="progress-step"
+    [class.active]="currentStep === 2"
+    [class.completed]="currentStep > 2"
+  >
+
+    <div class="step-circle">
+
+      <span
+        *ngIf="currentStep > 2"
+        class="material-icons"
+      >
+        check
+      </span>
+
+      <span *ngIf="currentStep <= 2">
+        2
+      </span>
+
+    </div>
+
+    <span class="step-label">
+      Doctor
+    </span>
+
+  </div>
+
+
+  <!-- LINE -->
+
+  <div
+    class="progress-line"
+    [class.completed-line]="currentStep > 2"
+  ></div>
+
+
+  <!-- DATE & TIME -->
+
+  <div
+    class="progress-step"
+    [class.active]="currentStep === 3"
+    [class.completed]="currentStep > 3"
+  >
+
+    <div class="step-circle">
+
+      <span
+        *ngIf="currentStep > 3"
+        class="material-icons"
+      >
+        check
+      </span>
+
+      <span *ngIf="currentStep <= 3">
+        3
+      </span>
+
+    </div>
+
+    <span class="step-label">
+      Date & Time
+    </span>
+
+  </div>
+
+
+  <!-- LINE -->
+
+  <div
+    class="progress-line"
+    [class.completed-line]="currentStep > 3"
+  ></div>
+
+
+  <!-- REVIEW -->
+
+  <div
+    class="progress-step"
+    [class.active]="currentStep === 4"
+    [class.completed]="currentStep > 4"
+  >
+
+    <div class="step-circle">
+
+      <span
+        *ngIf="currentStep > 4"
+        class="material-icons"
+      >
+        check
+      </span>
+
+      <span *ngIf="currentStep <= 4">
+        4
+      </span>
+
+    </div>
+
+    <span class="step-label">
+      Review
+    </span>
+
+  </div>
+
+</div>

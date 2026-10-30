@@ -1,0 +1,78 @@
+<header class="navbar">
+
+  <!-- SEARCH -->
+  <div class="search-container">
+
+    <span class="material-icons search-icon">
+      search
+    </span>
+
+    <input
+      #searchInput
+      type="text"
+      placeholder="Search patients..."
+      (input)="onSearch(searchInput.value)"
+    />
+
+  </div>
+
+
+  <!-- RIGHT SIDE -->
+  <div class="navbar-actions">
+
+    <!-- NOTIFICATIONS -->
+    <button
+      class="notification-button"
+      type="button"
+      aria-label="Notifications"
+    >
+
+      <span class="material-icons">
+        notifications_none
+      </span>
+
+      <span class="notification-badge">
+        39
+      </span>
+
+    </button>
+
+
+    <!-- PROFILE -->
+    <div class="profile">
+
+      <div class="profile-avatar">
+        {{ initial }}
+      </div>
+
+      <div class="profile-information">
+
+        <span class="profile-name">
+          {{ fullName }}
+        </span>
+
+        <span class="profile-role">
+          {{ roleLabel }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- LOG OUT -->
+    <button
+      class="logout-button"
+      type="button"
+      aria-label="Log out"
+      title="Log out"
+      (click)="logout()"
+    >
+      <span class="material-icons">
+        logout
+      </span>
+    </button>
+
+  </div>
+
+</header>

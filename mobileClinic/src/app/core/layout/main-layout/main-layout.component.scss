@@ -1,0 +1,22 @@
+.application-layout {
+  min-height: 100vh;
+  width: 100%;
+  background: #f5f7fa;
+}
+
+.application-content {
+  margin-left: 265px;
+  min-height: 100vh;
+  width: calc(100% - 265px);
+}
+
+.page-content {
+  min-height: calc(100vh - 82px);
+}
+
+@media (max-width: 768px) {
+  .application-content {
+    margin-left: 75px;
+    width: calc(100% - 75px);
+  }
+}

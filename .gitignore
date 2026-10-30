@@ -1,0 +1,25 @@
+# Angular
+mobileClinic/node_modules/
+mobileClinic/dist/
+mobileClinic/.angular/
+
+# Express backend
+backend/node_modules/
+
+# Python
+ML/__pycache__/
+ML/.venv/
+ML/venv/
+ML/*.pyc
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Operating system
+.DS_Store
+Thumbs.db

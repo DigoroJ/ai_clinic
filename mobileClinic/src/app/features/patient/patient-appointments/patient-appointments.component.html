@@ -1,0 +1,71 @@
+<div class="patient-page">
+  <main class="patient-content">
+
+    <button type="button" class="back-button" (click)="goBack()">
+      <span class="material-icons">arrow_back</span>
+      Back
+    </button>
+
+    <h1>My appointments</h1>
+    <p class="muted">Your booked visits and appointment history.</p>
+
+    <div class="message error" *ngIf="error" role="alert">{{ error }}</div>
+    <div class="message success" *ngIf="message" role="status">{{ message }}</div>
+
+    <p class="muted" *ngIf="loading">Loading...</p>
+
+    <h2>Upcoming</h2>
+
+    <p class="muted" *ngIf="!loading && upcoming.length === 0">
+      You have no upcoming appointments.
+    </p>
+
+    <div class="item-card" *ngFor="let a of upcoming">
+
+      <div class="date-box">
+        <span>{{ month(a.appointment_date) }}</span>
+        <strong>{{ day(a.appointment_date) }}</strong>
+      </div>
+
+      <div class="item-info">
+        <strong>{{ a.doctor }}</strong>
+        <span>{{ a.service }} · {{ a.specialty }}</span>
+        <small>{{ shortTime(a.appointment_time) }}</small>
+      </div>
+
+      <button
+        type="button"
+        class="cancel-button"
+        [disabled]="cancellingId === a.id"
+        (click)="cancel(a)"
+      >
+        {{ cancellingId === a.id ? 'Cancelling...' : 'Cancel' }}
+      </button>
+
+    </div>
+
+    <button type="button" class="primary-button" routerLink="/patient/book-appointment">
+      Book a new appointment
+    </button>
+
+    <h2 *ngIf="past.length > 0">History</h2>
+
+    <div class="item-card" *ngFor="let a of past">
+
+      <div class="date-box">
+        <span>{{ month(a.appointment_date) }}</span>
+        <strong>{{ day(a.appointment_date) }}</strong>
+      </div>
+
+      <div class="item-info">
+        <strong>{{ a.doctor }}</strong>
+        <span>{{ a.service }}</span>
+        <small>{{ shortTime(a.appointment_time) }}</small>
+      </div>
+
+      <span class="chip" [ngClass]="a.status.toLowerCase()">{{ a.status }}</span>
+
+    </div>
+
+  </main>
+</div>

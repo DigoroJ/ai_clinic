@@ -1,0 +1,159 @@
+
+<div class="page">
+
+  <div class="page-header">
+    <div>
+      <h1>Doctors</h1>
+      <p>Manage healthcare providers and availability.</p>
+    </div>
+
+    <button class="primary-button" type="button">
+      <span class="material-icons">person_add</span>
+      Add Doctor
+    </button>
+  </div>
+
+  <!-- Statistics -->
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">medical_services</span>
+      </div>
+      <div>
+        <span>Total Doctors</span>
+        <strong>{{ doctors.length }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">check_circle</span>
+      </div>
+      <div>
+        <span>Available</span>
+        <strong>{{ availableDoctorsCount }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">groups</span>
+      </div>
+      <div>
+        <span>Patients Served</span>
+        <strong>{{ patientsServedCount | number }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <!-- Search -->
+    <div class="toolbar">
+      <div class="search-box">
+        <span class="material-icons">search</span>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Search doctors..."
+          aria-label="Search doctors">
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <app-empty-state
+      *ngIf="loading"
+      variant="loading"
+      icon="hourglass_top"
+      title="Loading doctors"
+      message="Please wait while we retrieve doctor records.">
+    </app-empty-state>
+
+    <!-- Error State -->
+    <app-empty-state
+      *ngIf="!loading && errorMessage"
+      variant="error"
+      icon="cloud_off"
+      title="Unable to load doctors"
+      [message]="errorMessage"
+      actionLabel="Try again"
+      (action)="loadDoctors()">
+    </app-empty-state>
+
+    <!-- Doctors Table -->
+    <div
+      class="table-wrapper"
+      *ngIf="!loading && !errorMessage && filteredDoctors.length > 0">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Doctor</th>
+            <th>Specialty</th>
+            <th>Phone</th>
+            <th>Patients</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let doctor of filteredDoctors">
+
+            <td class="patient-name">
+              <div class="avatar doctor-avatar">
+                <span class="material-icons">person</span>
+              </div>
+              {{ doctor.name }}
+            </td>
+
+            <td>{{ doctor.specialty }}</td>
+            <td>{{ doctor.phone }}</td>
+            <td>{{ doctor.patients }}</td>
+
+            <td>
+              <span
+                class="status"
+                [class.busy]="doctor.status === 'Busy'">
+                {{ doctor.status }}
+              </span>
+            </td>
+
+            <td>
+              <button
+                class="icon-button"
+                type="button"
+                [attr.aria-label]="'Actions for ' + doctor.name">
+                <span class="material-icons">more_vert</span>
+              </button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- Empty State -->
+    <app-empty-state
+      *ngIf="!loading && !errorMessage && doctors.length === 0"
+      variant="empty"
+      icon="medical_services"
+      title="No doctors registered"
+      message="Doctor records will appear here once they are available.">
+    </app-empty-state>
+
+    <!-- Search Has No Matches -->
+    <app-empty-state
+      *ngIf="!loading && !errorMessage && doctors.length > 0 && filteredDoctors.length === 0"
+      variant="empty"
+      icon="person_search"
+      title="No doctors found"
+      message="Try a different doctor name or specialty.">
+    </app-empty-state>
+
+  </div>
+
+</div>

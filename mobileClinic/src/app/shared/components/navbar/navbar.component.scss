@@ -1,0 +1,323 @@
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+  height: 82px;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+
+  background: white;
+
+  border-bottom: 1px solid #e8e8e8;
+
+  box-sizing: border-box;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 900;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-container {
+  width: 360px;
+
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+
+  left: 14px;
+
+  color: #888;
+
+  font-size: 21px;
+
+  pointer-events: none;
+}
+
+.search-container input {
+  width: 100%;
+  height: 100%;
+
+  padding: 0 15px 0 44px;
+
+  border: 1px solid #e1e4e8;
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background: #f8f9fb;
+
+  color: #333;
+
+  font-size: 14px;
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.search-container input::placeholder {
+  color: #999;
+}
+
+.search-container input:focus {
+  border-color: #2864dc;
+
+  background: white;
+}
+
+
+/* =========================================================
+   NAVBAR ACTIONS
+========================================================= */
+
+.navbar-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 22px;
+}
+
+
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
+
+.notification-button {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  color: #555;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.notification-button:hover {
+  background: #f4f6f8;
+}
+
+.notification-button .material-icons {
+  font-size: 23px;
+}
+
+.notification-badge {
+  position: absolute;
+
+  top: 3px;
+  right: 2px;
+
+  min-width: 17px;
+  height: 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 4px;
+
+  border-radius: 20px;
+
+  background: #e53935;
+
+  color: white;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #2864dc;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+.profile-information {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.profile-name {
+  color: #222;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.profile-role {
+  color: #888;
+
+  font-size: 11px;
+}
+
+.profile-arrow {
+  color: #777;
+
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .search-container {
+    width: 280px;
+  }
+
+  .navbar {
+    padding: 0 20px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .search-container {
+    width: 220px;
+  }
+
+  .profile-information {
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 550px) {
+
+  .navbar {
+    padding: 0 15px;
+  }
+
+  .search-container {
+    width: 180px;
+  }
+
+  .navbar-actions {
+    gap: 8px;
+  }
+
+  .profile-arrow {
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 400px) {
+
+  .search-container {
+    width: 150px;
+  }
+
+  .search-container input {
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   LOG OUT BUTTON
+========================================================= */
+
+.logout-button {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #555;
+
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background: #fdecea;
+  color: #b3261e;
+}
+
+.logout-button .material-icons {
+  font-size: 22px;
+}

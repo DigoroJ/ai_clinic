@@ -1,0 +1,603 @@
+
+<div class="page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h1>AI Triage</h1>
+      <p>AI-assisted patient prioritisation and service recommendation.</p>
+    </div>
+
+    <div class="ai-status">
+      <span class="status-dot"></span>
+      AI Prediction Service
+    </div>
+  </div>
+
+  <!-- AI Information Banner -->
+  <div class="ai-banner">
+    <div class="ai-banner-icon">
+      <span class="material-icons">psychology</span>
+    </div>
+
+    <div>
+      <h2>AI Triage Decision Support</h2>
+      <p>
+        Select an existing patient or register a new patient, then enter
+        the clinical information required by the prediction model.
+        The prediction is experimental decision support, not a diagnosis.
+      </p>
+    </div>
+  </div>
+
+  <!-- Statistics -->
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">psychology</span>
+      </div>
+      <div>
+        <span>Cases Analysed</span>
+        <strong>
+          {{ casesAnalysed !== null
+            ? (casesAnalysed | number)
+            : '—' }}
+        </strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">priority_high</span>
+      </div>
+      <div>
+        <span>High Priority</span>
+        <strong>
+          {{ highPriorityCases !== null
+            ? (highPriorityCases | number)
+            : '—' }}
+        </strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <span class="material-icons">analytics</span>
+      </div>
+      <div>
+        <span>Model Accuracy</span>
+        <strong>
+          {{ modelAccuracy !== null
+            ? (modelAccuracy | number:'1.1-2') + '%'
+            : '—' }}
+        </strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Patient Assessment -->
+  <div class="card">
+
+    <div class="card-title">
+      <h2>Patient Assessment</h2>
+      <p>Choose a patient and complete the assessment.</p>
+    </div>
+
+    <!-- Patient Mode -->
+    <div class="form-section">
+      <h3>Patient Type</h3>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="patientMode">Assessment For</label>
+
+          <select
+            id="patientMode"
+            name="patientMode"
+            [(ngModel)]="patientMode"
+            (ngModelChange)="onPatientModeChange()">
+
+            <option value="existing">Existing Patient</option>
+            <option value="new">New Patient</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Existing Patient Selection -->
+    <div class="form-section" *ngIf="patientMode === 'existing'">
+
+      <h3>Select Existing Patient</h3>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="patientId">Registered Patient</label>
+
+          <select
+            id="patientId"
+            name="patientId"
+            [(ngModel)]="selectedPatientId"
+            required
+            [disabled]="patientsLoading">
+
+            <option [ngValue]="null">
+              Select a registered patient
+            </option>
+
+            <option
+              *ngFor="let existingPatient of patients"
+              [ngValue]="existingPatient.id">
+
+              {{ existingPatient.first_name }}
+              {{ existingPatient.last_name }}
+              (ID: {{ existingPatient.id }})
+
+            </option>
+          </select>
+
+          <small *ngIf="patientsLoading">
+            Loading registered patients...
+          </small>
+
+          <small *ngIf="patientsError">
+            {{ patientsError }}
+          </small>
+        </div>
+
+      </div>
+
+      <app-empty-state
+        *ngIf="!patientsLoading && !patientsError && patients.length === 0"
+        variant="empty"
+        icon="person_search"
+        title="No registered patients found"
+        message="Choose New Patient above to register a patient before running triage.">
+      </app-empty-state>
+
+    </div>
+
+    <!-- New Patient Form -->
+    <div class="form-section" *ngIf="patientMode === 'new'">
+
+      <h3>Register New Patient</h3>
+      <p>Enter the patient's details before starting the assessment.</p>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+
+          <input
+            id="firstName"
+            name="firstName"
+            type="text"
+            [(ngModel)]="newPatient.first_name"
+            autocomplete="given-name"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+
+          <input
+            id="lastName"
+            name="lastName"
+            type="text"
+            [(ngModel)]="newPatient.last_name"
+            autocomplete="family-name"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+
+          <input
+            id="email"
+            name="email"
+            type="email"
+            [(ngModel)]="newPatient.email"
+            autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            [(ngModel)]="newPatient.phone"
+            autocomplete="tel">
+        </div>
+
+      </div>
+
+      <p class="form-hint">
+        Required fields are marked with an asterisk.
+      </p>
+
+      <app-empty-state
+        *ngIf="patientCreationError"
+        variant="error"
+        icon="error_outline"
+        title="Patient registration failed"
+        [message]="patientCreationError">
+      </app-empty-state>
+
+    </div>
+
+    <!-- Clinical Assessment -->
+    <div class="form-section">
+
+      <h3>Clinical Information</h3>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="age">Age *</label>
+
+          <input
+            id="age"
+            name="age"
+            type="number"
+            [(ngModel)]="patient.age"
+            min="0"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender *</label>
+
+          <select
+            id="gender"
+            name="gender"
+            [(ngModel)]="patient.gender"
+            required>
+
+            <option value="">Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="temperature">Temperature (°C) *</label>
+
+          <input
+            id="temperature"
+            name="temperature"
+            type="number"
+            [(ngModel)]="patient.temperature"
+            min="25"
+            max="45"
+            step="0.1"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="daysSymptoms">Days with Symptoms *</label>
+
+          <input
+            id="daysSymptoms"
+            name="daysSymptoms"
+            type="number"
+            [(ngModel)]="patient.days_symptoms"
+            min="0"
+            required>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Symptoms -->
+    <div class="form-section">
+
+      <h3>Symptoms</h3>
+      <p>Select all symptoms that apply.</p>
+
+      <div class="symptom-grid">
+
+        <label class="symptom-option">
+          <input
+            type="checkbox"
+            [checked]="patient.fever === 1"
+            (change)="setSymptom('fever', $any($event.target).checked)">
+          Fever
+        </label>
+
+        <label class="symptom-option">
+          <input
+            type="checkbox"
+            [checked]="patient.cough === 1"
+            (change)="setSymptom('cough', $any($event.target).checked)">
+          Cough
+        </label>
+
+        <label class="symptom-option">
+          <input
+            type="checkbox"
+            [checked]="patient.rash === 1"
+            (change)="setSymptom('rash', $any($event.target).checked)">
+          Rash
+        </label>
+
+        <label class="symptom-option">
+          <input
+            type="checkbox"
+            [checked]="patient.headache === 1"
+            (change)="setSymptom('headache', $any($event.target).checked)">
+          Headache
+        </label>
+
+        <label class="symptom-option">
+          <input
+            type="checkbox"
+            [checked]="patient.vomiting === 1"
+            (change)="setSymptom('vomiting', $any($event.target).checked)">
+          Vomiting
+        </label>
+
+        <label class="symptom-option">
+          <input
+            type="checkbox"
+            [checked]="patient.fatigue === 1"
+            (change)="setSymptom('fatigue', $any($event.target).checked)">
+          Fatigue
+        </label>
+
+        <label class="symptom-option">
+          <input
+            type="checkbox"
+            [checked]="patient.sore_throat === 1"
+            (change)="setSymptom('sore_throat', $any($event.target).checked)">
+          Sore throat
+        </label>
+
+        <label class="symptom-option">
+          <input
+            type="checkbox"
+            [checked]="patient.breathing_issue === 1"
+            (change)="setSymptom('breathing_issue', $any($event.target).checked)">
+          Breathing difficulty
+        </label>
+
+      </div>
+
+    </div>
+
+    <!-- Additional Information -->
+    <div class="form-section">
+
+      <h3>Additional Information</h3>
+
+      <label class="symptom-option">
+        <input
+          type="checkbox"
+          [checked]="patient.travel_history === 1"
+          (change)="setSymptom('travel_history', $any($event.target).checked)">
+        Recent travel history
+      </label>
+
+    </div>
+
+    <!-- Errors -->
+    <app-empty-state
+      *ngIf="predictionError"
+      variant="error"
+      icon="error_outline"
+      title="Assessment unsuccessful"
+      [message]="predictionError">
+    </app-empty-state>
+
+    <!-- Actions -->
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="resetForm()"
+        [disabled]="predictionLoading || patientCreationLoading">
+
+        Reset
+      </button>
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="runPrediction()"
+        [disabled]="predictionLoading || patientCreationLoading">
+
+        <span class="material-icons">
+          {{ predictionLoading || patientCreationLoading
+            ? 'hourglass_empty'
+            : 'psychology' }}
+        </span>
+
+        {{
+          patientCreationLoading
+            ? 'Registering Patient...'
+            : predictionLoading
+              ? 'Analysing...'
+              : patientMode === 'new'
+                ? 'Create Patient & Run Triage'
+                : 'Run AI Prediction'
+        }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Prediction Result -->
+  <div class="card" *ngIf="predictionResult">
+
+    <div class="card-title">
+      <h2>Prediction Result</h2>
+      <p>Generated by the connected machine learning model.</p>
+    </div>
+
+    <div class="prediction-result">
+
+      <span class="result-label">Predicted Disease</span>
+
+      <h3>{{ predictionResult.prediction }}</h3>
+
+      <p *ngIf="predictionResult.model">
+        Model: {{ predictionResult.model }}
+      </p>
+
+      <div *ngIf="predictionResult.probabilities">
+
+        <h4>Model Probabilities</h4>
+
+        <div
+          class="probability-row"
+          *ngFor="let item of predictionResult.probabilities | keyvalue">
+
+          <div class="probability-heading">
+            <span>{{ item.key }}</span>
+
+            <strong>
+              {{ getProbabilityPercent(item.value) | number:'1.1-2' }}%
+            </strong>
+          </div>
+
+          <div class="progress">
+            <div
+              class="progress-value"
+              [style.width.%]="getProbabilityPercent(item.value)">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <p class="disclaimer">
+        {{ predictionResult.disclaimer }}
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Recent AI Triage Cases -->
+  <div class="card">
+
+    <div class="toolbar">
+
+      <div>
+        <h2>Recent AI Triage Cases</h2>
+        <p>Previously saved prediction records.</p>
+      </div>
+
+      <select
+        aria-label="Filter triage cases by priority"
+        name="selectedPriority"
+        [(ngModel)]="selectedPriority">
+
+        <option value="All">All</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+
+    </div>
+
+    <app-empty-state
+      *ngIf="casesLoading"
+      variant="loading"
+      icon="hourglass_empty"
+      title="Loading triage history"
+      message="Retrieving saved predictions...">
+    </app-empty-state>
+
+    <app-empty-state
+      *ngIf="!casesLoading && casesError"
+      variant="error"
+      icon="error_outline"
+      title="Unable to load triage history"
+      [message]="casesError"
+      actionLabel="Try Again"
+      (action)="loadRecentCases()">
+    </app-empty-state>
+
+    <div
+      class="table-wrapper"
+      *ngIf="!casesLoading && !casesError && filteredCases.length > 0">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Patient</th>
+            <th>Symptoms</th>
+            <th>Predicted Disease</th>
+            <th>Priority</th>
+            <th>Confidence</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let item of filteredCases">
+
+            <td class="patient-name">
+              {{ item.patient }}
+            </td>
+
+            <td>{{ item.symptoms }}</td>
+
+            <td>{{ item.predictedDisease || '—' }}</td>
+
+            <td>
+              <span
+                class="priority"
+                [class.high]="item.priority === 'High'"
+                [class.medium]="item.priority === 'Medium'">
+
+                {{ item.priority }}
+
+              </span>
+            </td>
+
+            <td>
+              {{ item.confidence !== null
+                ? (item.confidence | number:'1.1-2') + '%'
+                : '—' }}
+            </td>
+
+            <td>
+              {{ item.createdAt
+                ? (item.createdAt | date:'medium')
+                : '—' }}
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <app-empty-state
+      *ngIf="!casesLoading && !casesError && filteredCases.length === 0"
+      variant="empty"
+      icon="clinical_notes"
+      title="No saved triage cases"
+      message="Saved AI predictions will appear here after assessments have been completed.">
+    </app-empty-state>
+
+  </div>
+
+</div>

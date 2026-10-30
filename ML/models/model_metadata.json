@@ -1,0 +1,28 @@
+{
+  "model_name": "Random Forest",
+  "target": "disease",
+  "features": [
+    "fever",
+    "cough",
+    "rash",
+    "headache",
+    "vomiting",
+    "fatigue",
+    "sore_throat",
+    "breathing_issue",
+    "age",
+    "gender",
+    "temperature",
+    "days_symptoms",
+    "travel_history"
+  ],
+  "classes": [
+    "COVID",
+    "Dengue",
+    "Flu",
+    "Measles"
+  ],
+  "selection_metric": "macro_f1",
+  "test_size": 0.2,
+  "random_state": 42
+}

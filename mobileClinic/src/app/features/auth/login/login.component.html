@@ -1,0 +1,70 @@
+<div class="auth-page">
+
+  <div class="auth-card">
+
+    <div class="auth-logo">
+      <span class="material-icons">local_hospital</span>
+    </div>
+
+    <h1>Mobile Clinic</h1>
+    <p class="auth-subtitle">Log in to continue</p>
+
+    <div class="auth-message success" *ngIf="infoMessage" role="status">
+      {{ infoMessage }}
+    </div>
+
+    <div class="auth-message error" *ngIf="errorMessage" role="alert">
+      {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="submit()" novalidate>
+
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="username"
+        placeholder="you@example.com"
+        [(ngModel)]="email"
+        [disabled]="loading"
+      />
+
+      <label for="password">Password</label>
+      <div class="password-field">
+        <input
+          id="password"
+          name="password"
+          autocomplete="current-password"
+          placeholder="Your password"
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          [disabled]="loading"
+        />
+
+        <button
+          type="button"
+          class="toggle-password"
+          [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+          (click)="showPassword = !showPassword"
+        >
+          <span class="material-icons">
+            {{ showPassword ? 'visibility_off' : 'visibility' }}
+          </span>
+        </button>
+      </div>
+
+      <button type="submit" class="primary-button" [disabled]="loading">
+        {{ loading ? 'Logging in...' : 'Log in' }}
+      </button>
+
+    </form>
+
+    <p class="auth-footer">
+      New patient?
+      <a routerLink="/register">Create an account</a>
+    </p>
+
+  </div>
+
+</div>

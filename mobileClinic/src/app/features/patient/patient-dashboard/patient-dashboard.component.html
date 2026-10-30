@@ -1,0 +1,158 @@
+<div class="patient-page">
+
+  <!-- HEADER -->
+  <header class="patient-header">
+
+  <h1>Hello, {{ firstName }}</h1>
+
+  <button
+    class="icon-button notification"
+    type="button"
+    aria-label="Notifications"
+  >
+    <span class="material-icons">
+      notifications
+    </span>
+
+    <span class="notification-dot"></span>
+  </button>
+
+  <button
+    class="icon-button"
+    type="button"
+    aria-label="Log out"
+    title="Log out"
+    (click)="logout()"
+  >
+    <span class="material-icons">
+      logout
+    </span>
+  </button>
+
+</header>
+
+
+  <!-- UPCOMING APPOINTMENT -->
+  <section class="upcoming-section">
+
+    <h2>Upcoming appointments</h2>
+
+    <div class="appointment-card" *ngIf="nextAppointment; else noUpcoming">
+
+      <div class="appointment-date">
+        <span>{{ nextMonth }}</span>
+        <strong>{{ nextDay }}</strong>
+      </div>
+
+      <div class="appointment-info">
+        <strong>{{ nextAppointment.doctor }}</strong>
+        <span>{{ nextAppointment.specialty }}</span>
+        <small>{{ nextTime }}</small>
+      </div>
+
+      <button class="details-button" routerLink="/patient/appointments">
+        View details
+      </button>
+
+    </div>
+
+    <ng-template #noUpcoming>
+
+      <div class="appointment-card">
+
+        <div class="appointment-info">
+          <strong>No upcoming appointments</strong>
+          <span>Book a visit in a few taps.</span>
+        </div>
+
+        <button class="details-button" routerLink="/patient/book-appointment">
+          Book now
+        </button>
+
+      </div>
+
+    </ng-template>
+
+  </section>
+
+
+  <!-- QUICK ACTIONS -->
+  <section class="quick-actions">
+
+    <h2>Quick actions</h2>
+
+    <div class="action-grid">
+
+      <button routerLink="/patient/book-appointment">
+        <span class="material-icons">
+          calendar_month
+        </span>
+        <span>Book Appointment</span>
+      </button>
+
+      <button routerLink="/patient/symptom-checker">
+        <span class="material-icons">
+          health_and_safety
+        </span>
+        <span>Symptom Checker</span>
+      </button>
+
+      <button routerLink="/patient/records">
+        <span class="material-icons">
+          folder
+        </span>
+        <span>My Records</span>
+      </button>
+
+      <button>
+        <span class="material-icons">
+          medication
+        </span>
+        <span>Prescriptions</span>
+      </button>
+
+      <button>
+        <span class="material-icons">
+          chat
+        </span>
+        <span>Messages</span>
+      </button>
+
+      <button>
+        <span class="material-icons">
+          favorite
+        </span>
+        <span>Health Tips</span>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-navigation">
+
+    <a routerLink="/patient/dashboard" class="active">
+      <span class="material-icons">home</span>
+      <span>Home</span>
+    </a>
+
+    <a>
+      <span class="material-icons">calendar_month</span>
+      <span>Appointments</span>
+    </a>
+
+    <a>
+      <span class="material-icons">description</span>
+      <span>Records</span>
+    </a>
+
+    <a>
+      <span class="material-icons">person</span>
+      <span>Profile</span>
+    </a>
+
+  </nav>
+
+</div>

@@ -1,0 +1,456 @@
+:host {
+  display: block;
+}
+
+.clinical-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.pad {
+  padding: 14px 18px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* ---------- header ---------- */
+
+.page-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.page-top h1 {
+  margin: 0 0 4px;
+  color: #151b2b;
+  font-size: 24px;
+}
+
+.page-top p {
+  margin: 0;
+}
+
+.day-picker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.day-picker button {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #374151;
+  cursor: pointer;
+}
+
+.day-picker input[type='date'] {
+  height: 36px;
+  padding: 0 10px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #151b2b;
+  font-size: 14px;
+}
+
+.text-button,
+.day-picker .text-button {
+  width: auto;
+  padding: 0 12px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  border: none;
+  background: transparent;
+  color: #2864dc;
+
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.text-button:disabled {
+  color: #9ca3af;
+  cursor: default;
+}
+
+.text-button .material-icons {
+  font-size: 18px;
+}
+
+/* ---------- stat cards ---------- */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  padding: 16px 18px;
+
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(21, 27, 43, 0.08);
+}
+
+.stat-card strong {
+  color: #151b2b;
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.stat-label {
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.stat-card.danger strong {
+  color: #b3261e;
+}
+
+/* ---------- layout ---------- */
+
+.clinical-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.clinical-layout.with-panel {
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
+}
+
+.card {
+  min-width: 0;
+
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(21, 27, 43, 0.08);
+}
+
+.card-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 16px 18px 8px;
+}
+
+.card-title h2 {
+  margin: 0 0 2px;
+  color: #151b2b;
+  font-size: 17px;
+}
+
+.panel {
+  padding-bottom: 18px;
+}
+
+.panel > *:not(.card-title) {
+  margin-left: 18px;
+  margin-right: 18px;
+}
+
+.panel h3 {
+  margin: 18px 18px 8px;
+  color: #151b2b;
+  font-size: 14px;
+}
+
+.panel p {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.icon-only {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.icon-only:hover {
+  background: #f3f4f6;
+}
+
+/* ---------- table ---------- */
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  padding: 10px 14px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+td {
+  padding: 12px 14px;
+
+  border-bottom: 1px solid #f1f2f5;
+
+  color: #151b2b;
+  vertical-align: top;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:hover {
+  background: #f7f9fc;
+}
+
+tbody tr.active {
+  background: #eef3fd;
+}
+
+.sub {
+  display: block;
+  margin-top: 2px;
+
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.actions {
+  text-align: right;
+}
+
+/* ---------- badges ---------- */
+
+.badge,
+.chip {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 10px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.high {
+  background: #fdecea;
+  color: #b3261e;
+}
+
+.badge.moderate {
+  background: #fff4e0;
+  color: #9a5b00;
+}
+
+.badge.low {
+  background: #e8f5e9;
+  color: #1b6b2f;
+}
+
+.badge.none {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.chip.pending {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.chip.confirmed {
+  background: #e3edfd;
+  color: #1f52b8;
+}
+
+.chip.completed {
+  background: #e8f5e9;
+  color: #1b6b2f;
+}
+
+/* ---------- lists ---------- */
+
+.plain-list {
+  margin: 0 18px 8px;
+  padding: 0;
+
+  list-style: none;
+}
+
+.plain-list li {
+  padding: 8px 0;
+
+  border-bottom: 1px solid #f1f2f5;
+
+  font-size: 14px;
+}
+
+.hint {
+  margin: 4px 18px 0;
+
+  color: #6b7280;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* ---------- form ---------- */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  margin: 0 18px;
+}
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.form-grid .wide {
+  grid-column: 1 / -1;
+}
+
+.form-grid input,
+.form-grid textarea {
+  padding: 9px 12px;
+  box-sizing: border-box;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #151b2b;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.form-grid input:focus,
+.form-grid textarea:focus {
+  outline: none;
+  border-color: #2864dc;
+  box-shadow: 0 0 0 3px rgba(40, 100, 220, 0.15);
+}
+
+.primary-button,
+.small-button {
+  border: none;
+  border-radius: 8px;
+
+  background: #2864dc;
+  color: #ffffff;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-button {
+  height: 42px;
+  font-size: 14px;
+}
+
+.small-button {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.primary-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.message {
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+}
+
+.message.error {
+  background: #fdecea;
+  color: #b3261e;
+}
+
+.message.success {
+  background: #e8f5e9;
+  color: #1b6b2f;
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 1100px) {
+  .clinical-layout.with-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

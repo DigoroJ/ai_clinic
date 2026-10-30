@@ -1,0 +1,826 @@
+/* =========================================================
+   REVIEW PAGE
+========================================================= */
+
+.review-page {
+  width: 100%;
+  min-height: 100vh;
+
+  background: #f7f9fc;
+
+  padding-bottom: 90px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.review-header {
+  width: 100%;
+  max-width: 900px;
+
+  height: 75px;
+
+  margin: 0 auto;
+
+  padding: 0 20px;
+
+  display: grid;
+
+  grid-template-columns: 45px 1fr 45px;
+
+  align-items: center;
+
+  box-sizing: border-box;
+}
+
+.review-header h1 {
+  margin: 0;
+
+  text-align: center;
+
+  color: #151b2b;
+
+  font-size: 25px;
+
+  font-weight: 700;
+}
+
+.header-spacer {
+  width: 45px;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-button {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #151b2b;
+
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background: #e9edf3;
+}
+
+.back-button .material-icons {
+  font-size: 27px;
+}
+
+
+/* =========================================================
+   PROGRESS STEPPER
+========================================================= */
+
+.progress-container {
+  width: 100%;
+  max-width: 850px;
+
+  margin: 10px auto 25px;
+
+  padding: 0 20px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  box-sizing: border-box;
+}
+
+.progress-step {
+  flex: 0 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.step-circle {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #aab1bc;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  color: #7d8591;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.step-circle .material-icons {
+  font-size: 17px;
+}
+
+.step-label {
+  color: #666d78;
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+
+/* COMPLETED */
+
+.progress-step.completed .step-circle {
+  border-color: #2864dc;
+
+  background: #2864dc;
+
+  color: #ffffff;
+}
+
+.progress-step.completed .step-label {
+  color: #2864dc;
+}
+
+
+/* ACTIVE */
+
+.progress-step.active .step-circle {
+  border-color: #2864dc;
+
+  background: #2864dc;
+
+  color: #ffffff;
+}
+
+.progress-step.active .step-label {
+  color: #2864dc;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   PROGRESS LINES
+========================================================= */
+
+.progress-line {
+  flex: 1;
+
+  height: 1px;
+
+  margin-top: 16px;
+
+  background: #c8cdd5;
+}
+
+.progress-line.completed-line {
+  background: #2864dc;
+}
+
+.progress-line.active-line {
+  background: #2864dc;
+}
+
+
+/* =========================================================
+   INSTRUCTION
+========================================================= */
+
+.instruction-box {
+  width: calc(100% - 40px);
+
+  max-width: 850px;
+
+  min-height: 54px;
+
+  margin: 0 auto 25px;
+
+  padding: 10px 16px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border: 1px solid #adb5c2;
+
+  border-radius: 11px;
+
+  background: #e9edf3;
+
+  color: #252b36;
+
+  font-size: 14px;
+
+  box-sizing: border-box;
+}
+
+.instruction-box .material-icons {
+  color: #2864dc;
+
+  font-size: 19px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.review-content {
+  width: calc(100% - 40px);
+
+  max-width: 850px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   APPOINTMENT CARD
+========================================================= */
+
+.appointment-card {
+  width: 100%;
+
+  padding: 28px;
+
+  box-sizing: border-box;
+
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 7px 22px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+.card-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+}
+
+.card-title .material-icons {
+  color: #2864dc;
+
+  font-size: 23px;
+}
+
+.card-title h2 {
+  margin: 0;
+
+  color: #151b2b;
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   APPOINTMENT DETAILS
+========================================================= */
+
+.appointment-detail {
+  min-height: 68px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #e4e7eb;
+
+  box-sizing: border-box;
+}
+
+.appointment-detail:last-child {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   DETAIL ICON
+========================================================= */
+
+.detail-icon {
+  width: 42px;
+  height: 42px;
+
+  min-width: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #edf3ff;
+
+  color: #2864dc;
+}
+
+.detail-icon .material-icons {
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   DETAIL INFORMATION
+========================================================= */
+
+.detail-information {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.detail-label {
+  color: #858b96;
+
+  font-size: 11px;
+}
+
+.detail-information strong {
+  color: #151b2b;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   CONFIRMATION NOTICE
+========================================================= */
+
+.confirmation-notice {
+  width: 100%;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-top: 18px;
+
+  padding: 16px;
+
+  border-radius: 12px;
+
+  background: #edf7ed;
+
+  box-sizing: border-box;
+}
+
+.confirmation-notice > .material-icons {
+  color: #4caf50;
+
+  font-size: 23px;
+}
+
+.confirmation-notice strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #276b2d;
+
+  font-size: 13px;
+}
+
+.confirmation-notice p {
+  margin: 0;
+
+  color: #617061;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   CONFIRM BUTTON
+========================================================= */
+
+.confirm-button {
+  width: 100%;
+
+  max-width: 420px;
+
+  height: 54px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 28px auto 0;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #2864dc;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.confirm-button:hover {
+  background: #1f56c5;
+
+  transform: translateY(-1px);
+}
+
+.confirm-button .material-icons {
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
+
+.bottom-navigation {
+  position: fixed;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+
+  height: 72px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  align-items: center;
+
+  background: #ffffff;
+
+  border-top: 1px solid #e3e6eb;
+
+  box-shadow:
+    0 -3px 12px rgba(0, 0, 0, 0.06);
+
+  z-index: 1000;
+}
+
+.bottom-navigation a {
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  color: #9ba3b1;
+
+  text-decoration: none;
+
+  font-size: 11px;
+}
+
+.bottom-navigation a.active {
+  color: #2864dc;
+}
+
+.bottom-navigation .material-icons {
+  font-size: 22px;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1200px) {
+
+  .review-header {
+    max-width: 900px;
+  }
+
+  .progress-container {
+    max-width: 850px;
+  }
+
+  .instruction-box,
+  .review-content {
+    max-width: 850px;
+  }
+
+  .appointment-card {
+    padding: 32px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .review-header {
+    padding: 0 15px;
+  }
+
+  .progress-container {
+    padding: 0 15px;
+  }
+
+  .review-content {
+    width: calc(100% - 30px);
+  }
+
+  .instruction-box {
+    width: calc(100% - 30px);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .review-page {
+    padding-bottom: 85px;
+  }
+
+
+  /* HEADER */
+
+  .review-header {
+    height: 65px;
+
+    grid-template-columns: 40px 1fr 40px;
+
+    padding: 0 10px;
+  }
+
+  .review-header h1 {
+    font-size: 20px;
+  }
+
+  .back-button {
+    width: 38px;
+    height: 38px;
+  }
+
+
+  /* PROGRESS */
+
+  .progress-container {
+    margin-top: 5px;
+
+    padding: 0 10px;
+
+    margin-bottom: 20px;
+  }
+
+  .step-circle {
+    width: 28px;
+    height: 28px;
+
+    font-size: 11px;
+  }
+
+  .step-circle .material-icons {
+    font-size: 15px;
+  }
+
+  .step-label {
+    font-size: 9px;
+  }
+
+  .progress-line {
+    margin-top: 14px;
+  }
+
+
+  /* INSTRUCTION */
+
+  .instruction-box {
+    width: calc(100% - 20px);
+
+    min-height: 48px;
+
+    margin-bottom: 18px;
+
+    font-size: 11px;
+  }
+
+
+  /* CONTENT */
+
+  .review-content {
+    width: calc(100% - 20px);
+  }
+
+
+  /* CARD */
+
+  .appointment-card {
+    padding: 18px;
+
+    border-radius: 15px;
+  }
+
+  .card-title h2 {
+    font-size: 17px;
+  }
+
+  .appointment-detail {
+    min-height: 62px;
+
+    gap: 10px;
+  }
+
+  .detail-icon {
+    width: 36px;
+    height: 36px;
+
+    min-width: 36px;
+  }
+
+  .detail-information strong {
+    font-size: 13px;
+  }
+
+
+  /* NOTICE */
+
+  .confirmation-notice {
+    padding: 13px;
+  }
+
+  .confirmation-notice p {
+    font-size: 10px;
+  }
+
+
+  /* BUTTON */
+
+  .confirm-button {
+    height: 50px;
+
+    margin-top: 20px;
+
+    font-size: 14px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .review-header h1 {
+    font-size: 18px;
+  }
+
+  .progress-container {
+    padding: 0 5px;
+  }
+
+  .step-label {
+    font-size: 8px;
+  }
+
+  .progress-line {
+    min-width: 15px;
+  }
+
+  .instruction-box {
+    font-size: 10px;
+  }
+
+  .appointment-card {
+    padding: 15px;
+  }
+
+  .card-title h2 {
+    font-size: 16px;
+  }
+
+  .appointment-detail {
+    padding: 10px 0;
+  }
+
+  .detail-icon {
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+  }
+
+  .detail-information strong {
+    font-size: 12px;
+  }
+
+  .detail-label {
+    font-size: 10px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .review-header h1 {
+    font-size: 16px;
+  }
+
+  .step-circle {
+    width: 25px;
+    height: 25px;
+  }
+
+  .step-label {
+    font-size: 7px;
+  }
+
+  .progress-line {
+    margin-top: 12px;
+  }
+
+  .appointment-card {
+    padding: 12px;
+  }
+
+}

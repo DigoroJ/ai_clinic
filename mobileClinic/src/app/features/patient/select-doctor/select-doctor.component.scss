@@ -1,0 +1,864 @@
+/* =========================================================
+   SELECT DOCTOR PAGE
+========================================================= */
+
+.doctor-page {
+  width: 100%;
+  min-height: 100vh;
+
+  background: #f7f9fc;
+
+  padding-bottom: 95px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.doctor-header {
+  width: 100%;
+  max-width: 900px;
+
+  height: 75px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 45px 1fr 45px;
+
+  align-items: center;
+
+  padding: 0 20px;
+
+  box-sizing: border-box;
+}
+
+.doctor-header h1 {
+  margin: 0;
+
+  text-align: center;
+
+  color: #151b2b;
+
+  font-size: 24px;
+
+  font-weight: 700;
+}
+
+.header-spacer {
+  width: 45px;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-button {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #151b2b;
+
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background: #eef1f5;
+}
+
+.back-button .material-icons {
+  font-size: 24px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.doctor-content {
+  width: calc(100% - 40px);
+
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box {
+  width: 100%;
+
+  height: 52px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 15px;
+
+  border: 1px solid #aeb6c4;
+
+  border-radius: 12px;
+
+  background: #e9edf3;
+
+  box-sizing: border-box;
+}
+
+.search-icon {
+  color: #151b2b;
+
+  font-size: 23px;
+}
+
+.search-box input {
+  flex: 1;
+
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #151b2b;
+
+  font-size: 14px;
+}
+
+.search-box input::placeholder {
+  color: #555d68;
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.filters {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 14px 0 20px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
+}
+
+.filters button {
+  flex-shrink: 0;
+
+  min-width: 72px;
+
+  height: 36px;
+
+  padding: 0 16px;
+
+  border: none;
+
+  border-radius: 20px;
+
+  background: #f0f1f3;
+
+  color: #9299a6;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.filters button:hover {
+  background: #e4e8ee;
+}
+
+.filters button.active {
+  background: #2864dc;
+
+  color: white;
+}
+
+
+/* =========================================================
+   SELECTED SERVICE
+========================================================= */
+
+.selected-service {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 15px;
+
+  padding: 10px 12px;
+
+  border-radius: 9px;
+
+  background: #edf3ff;
+
+  color: #2864dc;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.selected-service .material-icons {
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   DOCTOR LIST
+========================================================= */
+
+.doctor-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+
+/* =========================================================
+   DOCTOR CARD
+========================================================= */
+
+.doctor-card {
+  width: 100%;
+
+  min-height: 142px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 14px;
+
+  padding: 18px;
+
+  border: 1px solid transparent;
+
+  border-radius: 16px;
+
+  background: white;
+
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.09);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.11);
+}
+
+
+/* SELECTED */
+
+.doctor-card.selected {
+  border-color: #2864dc;
+
+  background: #f5f8ff;
+
+  box-shadow:
+    0 5px 18px rgba(40, 100, 220, 0.15);
+}
+
+
+/* =========================================================
+   DOCTOR AVATAR
+========================================================= */
+
+.doctor-avatar {
+  width: 58px;
+  height: 58px;
+
+  min-width: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e3efff;
+
+  color: #111827;
+}
+
+.doctor-avatar .material-icons {
+  font-size: 32px;
+}
+
+
+/* =========================================================
+   DOCTOR INFORMATION
+========================================================= */
+
+.doctor-information {
+  flex: 1;
+
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding-right: 75px;
+}
+
+.doctor-information h2 {
+  margin: 1px 0 4px;
+
+  color: #151b2b;
+
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+.doctor-information p {
+  margin: 0;
+
+  color: #333b48;
+
+  font-size: 13px;
+}
+
+.doctor-meta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: 14px;
+
+  color: #555d68;
+
+  font-size: 11px;
+}
+
+.doctor-meta span:first-child {
+  color: #555d68;
+}
+
+
+/* =========================================================
+   AVAILABILITY
+========================================================= */
+
+.available,
+.unavailable {
+  position: absolute;
+
+  right: 16px;
+
+  bottom: 18px;
+
+  padding: 7px 14px;
+
+  border-radius: 18px;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+.available {
+  background: #d8f8e4;
+
+  color: #249451;
+}
+
+.unavailable {
+  background: #fde1e1;
+
+  color: #c62828;
+}
+
+
+/* =========================================================
+   SELECTED CHECK
+========================================================= */
+
+.selected-check {
+  position: absolute;
+
+  top: 15px;
+  right: 15px;
+
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #2864dc;
+
+  color: white;
+}
+
+.selected-check .material-icons {
+  font-size: 16px;
+}
+
+
+/* =========================================================
+   CONTINUE BUTTON
+========================================================= */
+
+.continue-button {
+  width: 100%;
+
+  height: 52px;
+
+  margin-top: 24px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #2864dc;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.continue-button:hover:not(:disabled) {
+  background: #1f56c5;
+
+  transform: translateY(-1px);
+}
+
+.continue-button:disabled {
+  background: #b8c5df;
+
+  color: #f3f5f9;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   NO RESULTS
+========================================================= */
+
+.no-results {
+  min-height: 180px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #9299a6;
+
+  text-align: center;
+}
+
+.no-results .material-icons {
+  font-size: 45px;
+
+  margin-bottom: 10px;
+}
+
+.no-results p {
+  margin: 0;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
+
+.bottom-navigation {
+  position: fixed;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+
+  height: 72px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  align-items: center;
+
+  background: white;
+
+  border-top: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 -3px 12px rgba(0, 0, 0, 0.06);
+
+  z-index: 1000;
+}
+
+.bottom-navigation a {
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  color: #9ca3af;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.bottom-navigation a.active {
+  color: #2864dc;
+}
+
+.bottom-navigation .material-icons {
+  font-size: 22px;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 1000px) {
+
+  .doctor-content {
+    max-width: 760px;
+  }
+
+  .doctor-card {
+    min-height: 150px;
+  }
+
+  .continue-button {
+    max-width: 500px;
+
+    display: block;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .doctor-header {
+    max-width: 760px;
+  }
+
+  .doctor-content {
+    max-width: 650px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .doctor-header {
+    height: 68px;
+
+    padding: 0 15px;
+  }
+
+  .doctor-header h1 {
+    font-size: 21px;
+  }
+
+  .doctor-content {
+    width: calc(100% - 30px);
+  }
+
+  .search-box {
+    height: 50px;
+  }
+
+  .doctor-card {
+    min-height: 135px;
+
+    padding: 15px;
+
+    gap: 12px;
+
+    border-radius: 14px;
+  }
+
+  .doctor-avatar {
+    width: 52px;
+    height: 52px;
+
+    min-width: 52px;
+  }
+
+  .doctor-avatar .material-icons {
+    font-size: 28px;
+  }
+
+  .doctor-information {
+    padding-right: 65px;
+  }
+
+  .doctor-information h2 {
+    font-size: 14px;
+  }
+
+  .doctor-information p {
+    font-size: 12px;
+  }
+
+  .doctor-meta {
+    margin-top: 11px;
+
+    font-size: 10px;
+  }
+
+  .available,
+  .unavailable {
+    right: 12px;
+    bottom: 14px;
+
+    padding: 6px 11px;
+
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 550px) {
+
+  .doctor-header {
+    padding: 0 10px;
+  }
+
+  .doctor-header h1 {
+    font-size: 20px;
+  }
+
+  .doctor-content {
+    width: calc(100% - 30px);
+  }
+
+  .filters {
+    gap: 7px;
+  }
+
+  .filters button {
+    min-width: 62px;
+
+    padding: 0 12px;
+
+    font-size: 11px;
+  }
+
+  .doctor-card {
+    min-height: 130px;
+
+    padding: 14px;
+  }
+
+  .doctor-avatar {
+    width: 48px;
+    height: 48px;
+
+    min-width: 48px;
+  }
+
+  .doctor-avatar .material-icons {
+    font-size: 26px;
+  }
+
+  .doctor-information {
+    padding-right: 55px;
+  }
+
+  .doctor-information h2 {
+    font-size: 13px;
+  }
+
+  .doctor-information p {
+    font-size: 11px;
+  }
+
+  .doctor-meta {
+    gap: 10px;
+
+    font-size: 9px;
+  }
+
+  .available,
+  .unavailable {
+    right: 10px;
+    bottom: 12px;
+
+    padding: 5px 9px;
+
+    font-size: 8px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .doctor-header h1 {
+    font-size: 18px;
+  }
+
+  .doctor-card {
+    min-height: 125px;
+
+    gap: 9px;
+
+    padding: 12px;
+  }
+
+  .doctor-avatar {
+    width: 43px;
+    height: 43px;
+
+    min-width: 43px;
+  }
+
+  .doctor-avatar .material-icons {
+    font-size: 23px;
+  }
+
+  .doctor-information {
+    padding-right: 48px;
+  }
+
+  .doctor-information h2 {
+    font-size: 12px;
+  }
+
+  .doctor-information p {
+    font-size: 10px;
+  }
+
+  .doctor-meta {
+    margin-top: 8px;
+
+    font-size: 8px;
+  }
+
+  .available,
+  .unavailable {
+    right: 8px;
+    bottom: 9px;
+
+    padding: 4px 7px;
+
+    font-size: 7px;
+  }
+
+  .continue-button {
+    height: 48px;
+
+    font-size: 14px;
+  }
+
+}

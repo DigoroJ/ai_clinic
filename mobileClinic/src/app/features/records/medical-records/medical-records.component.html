@@ -1,0 +1,88 @@
+<div class="page">
+
+  <div class="page-header">
+    <div>
+      <h1>Medical Records</h1>
+      <p>View and manage patient medical records.</p>
+    </div>
+
+    <button class="primary-button">
+      <span class="material-icons">note_add</span>
+      Add Record
+    </button>
+  </div>
+
+  <div class="card">
+
+    <div class="toolbar">
+
+      <div class="search-box">
+
+        <span class="material-icons">
+          search
+        </span>
+
+        <input
+          [(ngModel)]="searchTerm"
+          placeholder="Search medical records...">
+
+      </div>
+
+    </div>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Patient</th>
+            <th>Date</th>
+            <th>Service</th>
+            <th>Healthcare Provider</th>
+            <th>Diagnosis / Notes</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let record of filteredRecords">
+
+            <td class="patient-name">
+              {{ record.patient }}
+            </td>
+
+            <td>{{ record.date }}</td>
+            <td>{{ record.type }}</td>
+            <td>{{ record.doctor }}</td>
+            <td>{{ record.diagnosis }}</td>
+
+            <td>
+              <span
+                class="status"
+                [class.follow-up]="record.status === 'Follow-up'">
+
+                {{ record.status }}
+
+              </span>
+            </td>
+
+            <td>
+              <button class="icon-button">
+                <span class="material-icons">visibility</span>
+              </button>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

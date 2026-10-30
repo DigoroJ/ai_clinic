@@ -1,0 +1,429 @@
+.confirmation-page {
+  min-height: 100vh;
+  background: #f6f8fb;
+  padding-bottom: 40px;
+}
+
+.confirmation-content {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 40px 30px 60px;
+  text-align: center;
+}
+
+/* Success Icon */
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  margin: 10px auto 24px;
+
+  border-radius: 50%;
+  background: #e7f7ed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .material-icons {
+    font-size: 48px;
+    color: #22a35a;
+  }
+}
+
+.confirmation-content h1 {
+  margin: 0;
+  color: #172033;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.confirmation-message {
+  max-width: 600px;
+  margin: 12px auto 32px;
+
+  color: #697386;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Appointment Card */
+
+.appointment-card {
+  background: #ffffff;
+  border: 1px solid #e4e8ef;
+  border-radius: 16px;
+
+  padding: 24px;
+  text-align: left;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  > div > .material-icons {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 12px;
+    background: #eef4ff;
+
+    color: #2864d7;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+  }
+
+  h2 {
+    margin: 0 0 4px;
+    color: #172033;
+    font-size: 18px;
+  }
+
+  p {
+    margin: 0;
+    color: #8992a3;
+    font-size: 13px;
+  }
+}
+
+.status-badge {
+  padding: 7px 13px;
+
+  border-radius: 20px;
+  background: #e7f7ed;
+  color: #21894d;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.divider {
+  height: 1px;
+  background: #e9edf2;
+  margin: 22px 0;
+}
+
+/* Details */
+
+.appointment-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  .material-icons {
+    color: #2864d7;
+    font-size: 21px;
+    margin-top: 2px;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.detail-label {
+  color: #8992a3;
+  font-size: 12px;
+}
+
+.detail-item strong {
+  color: #172033;
+  font-size: 15px;
+}
+
+.detail-item small {
+  color: #697386;
+  font-size: 12px;
+}
+
+/* Reference */
+
+.booking-reference {
+  margin-top: 24px;
+  padding: 16px;
+
+  border-radius: 10px;
+  background: #f7f9fc;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    color: #697386;
+    font-size: 13px;
+  }
+
+  strong {
+    color: #172033;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* Notification */
+
+.notification {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  margin-top: 18px;
+  padding: 16px;
+
+  border: 1px solid #dbe7fb;
+  border-radius: 12px;
+
+  background: #f3f7ff;
+
+  text-align: left;
+
+  .material-icons {
+    color: #2864d7;
+    font-size: 22px;
+  }
+
+  strong {
+    color: #172033;
+    font-size: 14px;
+  }
+
+  p {
+    margin: 4px 0 0;
+    color: #697386;
+    font-size: 13px;
+  }
+}
+
+/* Buttons */
+
+.confirmation-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.primary-button,
+.secondary-button {
+  width: 100%;
+  max-width: 420px;
+
+  min-height: 48px;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.primary-button {
+  border: none;
+  background: #2864d7;
+  color: #ffffff;
+}
+
+.primary-button:hover {
+  background: #1f54bb;
+}
+
+.secondary-button {
+  border: 1px solid #d8dee8;
+  background: #ffffff;
+  color: #2864d7;
+}
+
+.secondary-button:hover {
+  background: #f5f8ff;
+}
+
+.text-button {
+  border: none;
+  background: transparent;
+  color: #2864d7;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 8px 12px;
+}
+
+/* Mobile Bottom Navigation */
+
+.mobile-bottom-nav {
+  display: none;
+}
+
+/* Desktop */
+
+@media (min-width: 1200px) {
+  .confirmation-content {
+    max-width: 900px;
+    padding-top: 50px;
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 850px) {
+  .confirmation-content {
+    padding: 30px 22px 50px;
+  }
+
+  .appointment-details {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .confirmation-page {
+    padding-bottom: 80px;
+  }
+
+  .confirmation-content {
+    padding: 24px 16px 100px;
+  }
+
+  .success-icon {
+    width: 68px;
+    height: 68px;
+    margin-bottom: 18px;
+
+    .material-icons {
+      font-size: 40px;
+    }
+  }
+
+  .confirmation-content h1 {
+    font-size: 25px;
+  }
+
+  .confirmation-message {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .appointment-card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .card-header {
+    align-items: flex-start;
+
+    > div {
+      gap: 10px;
+    }
+
+    > div > .material-icons {
+      width: 40px;
+      height: 40px;
+      font-size: 21px;
+    }
+
+    h2 {
+      font-size: 16px;
+    }
+  }
+
+  .status-badge {
+    font-size: 11px;
+    padding: 6px 9px;
+  }
+
+  .booking-reference {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .notification {
+    padding: 14px;
+  }
+
+  /* Bottom navigation */
+
+  .mobile-bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 64px;
+
+    background: #ffffff;
+    border-top: 1px solid #e5e9ef;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    z-index: 1000;
+  }
+
+  .mobile-bottom-nav a {
+    flex: 1;
+
+    height: 100%;
+
+    text-decoration: none;
+    color: #8992a3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+
+    font-size: 10px;
+  }
+
+  .mobile-bottom-nav a:hover,
+  .mobile-bottom-nav a.active {
+    color: #2864d7;
+  }
+
+  .mobile-bottom-nav .material-icons {
+    font-size: 21px;
+  }
+}

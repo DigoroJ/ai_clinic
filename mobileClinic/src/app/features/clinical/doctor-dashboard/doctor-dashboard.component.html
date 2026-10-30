@@ -1,0 +1,272 @@
+<div class="clinical-page">
+
+  <!-- ===== HEADER ===== -->
+  <header class="page-top">
+
+    <div>
+      <h1>Doctor Dashboard</h1>
+      <p class="muted">
+        <ng-container *ngIf="doctor">{{ doctor.name }}<ng-container *ngIf="doctor.specialty"> · {{ doctor.specialty }}</ng-container> · </ng-container>
+        {{ dayText }}
+      </p>
+    </div>
+
+    <div class="day-picker">
+      <button type="button" aria-label="Previous day" (click)="changeDay(-1)">
+        <span class="material-icons">chevron_left</span>
+      </button>
+
+      <input
+        type="date"
+        aria-label="Choose a day"
+        [ngModel]="date"
+        (ngModelChange)="setDate($event)"
+      />
+
+      <button type="button" aria-label="Next day" (click)="changeDay(1)">
+        <span class="material-icons">chevron_right</span>
+      </button>
+
+      <button type="button" class="text-button" [disabled]="isToday" (click)="goToday()">
+        Today
+      </button>
+    </div>
+
+  </header>
+
+
+  <!-- ===== STAT CARDS ===== -->
+  <div class="stat-grid">
+
+    <div class="stat-card">
+      <span class="stat-label">Booked</span>
+      <strong>{{ bookedCount }}</strong>
+      <span class="muted">not yet arrived</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Waiting</span>
+      <strong>{{ waitingCount }}</strong>
+      <span class="muted">ready to be seen</span>
+    </div>
+
+    <div class="stat-card danger">
+      <span class="stat-label">High priority</span>
+      <strong>{{ highPriorityCount }}</strong>
+      <span class="muted">from AI triage</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Completed</span>
+      <strong>{{ completedCount }}</strong>
+      <span class="muted">visits done</span>
+    </div>
+
+  </div>
+
+
+  <div class="message error" *ngIf="error" role="alert">{{ error }}</div>
+
+
+  <div class="clinical-layout" [class.with-panel]="selected">
+
+    <!-- ===== MY APPOINTMENTS ===== -->
+    <section class="card">
+
+      <div class="card-title">
+        <h2>My appointments</h2>
+        <button type="button" class="text-button" (click)="loadAppointments()" [disabled]="loading">
+          <span class="material-icons">refresh</span> Refresh
+        </button>
+      </div>
+
+      <p class="muted pad" *ngIf="loading && appointments.length === 0">Loading appointments...</p>
+
+      <p class="muted pad" *ngIf="!loading && !error && appointments.length === 0">
+        No appointments for this day.
+      </p>
+
+      <div class="table-wrap" *ngIf="appointments.length > 0">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Patient</th>
+              <th>Service</th>
+              <th>AI triage</th>
+              <th>Vitals</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              *ngFor="let item of appointments; trackBy: trackById"
+              [class.active]="selected?.id === item.id"
+              (click)="select(item)"
+            >
+              <td class="nowrap">{{ shortTime(item.appointment_time) }}</td>
+
+              <td>
+                <strong>{{ item.patient }}</strong>
+                <span class="sub" *ngIf="item.patient_phone">{{ item.patient_phone }}</span>
+              </td>
+
+              <td>{{ item.service }}</td>
+
+              <td>
+                <ng-container *ngIf="item.predicted_disease; else noAi">
+                  {{ item.predicted_disease }}
+                  <span class="sub">{{ percent(item.confidence) }}% confidence</span>
+                  <span class="badge" [ngClass]="priorityClass(item.priority)">
+                    {{ item.priority || 'n/a' }}
+                  </span>
+                </ng-container>
+                <ng-template #noAi><span class="muted">No symptom check yet</span></ng-template>
+              </td>
+
+              <td>
+                <ng-container *ngIf="item.assessment_id; else noVitals">
+                  <span *ngIf="item.temperature">{{ item.temperature }} °C</span>
+                  <span class="sub" *ngIf="item.blood_pressure">BP {{ item.blood_pressure }}</span>
+                </ng-container>
+                <ng-template #noVitals><span class="muted">Not taken</span></ng-template>
+              </td>
+
+              <td>
+                <span class="chip" [ngClass]="item.status.toLowerCase()">
+                  {{ statusLabel(item.status) }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+
+    <!-- ===== CONSULTATION PANEL ===== -->
+    <aside class="card panel" *ngIf="selected">
+
+      <div class="card-title">
+        <div>
+          <h2>{{ selected.patient }}</h2>
+          <span class="muted">
+            {{ shortTime(selected.appointment_time) }} · {{ selected.service }} ·
+            {{ statusLabel(selected.status) }}
+          </span>
+        </div>
+
+        <button type="button" class="icon-only" aria-label="Close" (click)="closePanel()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <p class="muted pad" *ngIf="summaryLoading">Loading patient details...</p>
+
+      <!-- Nurse vitals for this visit -->
+      <h3>Nurse assessment (this visit)</h3>
+
+      <ng-container *ngIf="selected.assessment_id; else noAssessment">
+        <p>
+          <ng-container *ngIf="selected.temperature">{{ selected.temperature }} °C · </ng-container>
+          <ng-container *ngIf="selected.blood_pressure">BP {{ selected.blood_pressure }} · </ng-container>
+          <ng-container *ngIf="selected.pulse">{{ selected.pulse }} bpm · </ng-container>
+          <ng-container *ngIf="selected.weight">{{ selected.weight }} kg</ng-container>
+        </p>
+        <p class="muted" *ngIf="selected.assessment_notes">{{ selected.assessment_notes }}</p>
+      </ng-container>
+
+      <ng-template #noAssessment>
+        <p class="muted">The nurse has not recorded vitals yet.</p>
+      </ng-template>
+
+      <ng-container *ngIf="summary">
+
+        <!-- AI -->
+        <h3>AI predictions</h3>
+
+        <p class="muted" *ngIf="summary.predictions.length === 0">
+          The patient has not used the symptom checker yet.
+        </p>
+
+        <ul class="plain-list" *ngIf="summary.predictions.length > 0">
+          <li *ngFor="let p of summary.predictions | slice:0:3">
+            <strong>{{ p.predicted_disease }}</strong>
+            <span class="sub">
+              {{ percent(p.confidence) }}% · {{ p.created_at | date:'d MMM, HH:mm' }}
+            </span>
+            <span class="badge" [ngClass]="priorityClass(p.priority)">{{ p.priority || 'n/a' }}</span>
+          </li>
+        </ul>
+
+        <p class="hint">
+          AI decision support only. The clinical decision is yours.
+        </p>
+
+        <!-- History -->
+        <h3>Previous visits</h3>
+
+        <p class="muted" *ngIf="summary.records.length === 0">No earlier records.</p>
+
+        <ul class="plain-list" *ngIf="summary.records.length > 0">
+          <li *ngFor="let r of summary.records | slice:0:3">
+            <strong>{{ r.diagnosis }}</strong>
+            <span class="sub">{{ r.visit_date }} · {{ r.doctor }}</span>
+            <span class="sub" *ngIf="r.treatment">Treatment: {{ r.treatment }}</span>
+          </li>
+        </ul>
+
+      </ng-container>
+
+
+      <!-- Consultation form -->
+      <h3>Consultation</h3>
+
+      <p class="muted" *ngIf="selected.status === 'Completed'">
+        This visit is already completed.
+      </p>
+
+      <form
+        (ngSubmit)="saveRecord()"
+        class="form-grid"
+        *ngIf="selected.status !== 'Completed'"
+      >
+
+        <label class="wide">
+          Diagnosis *
+          <input type="text" name="diagnosis" maxlength="500"
+                 [(ngModel)]="consultation.diagnosis" />
+        </label>
+
+        <label class="wide">
+          Treatment / prescription advice
+          <textarea rows="3" name="treatment" maxlength="2000"
+                    [(ngModel)]="consultation.treatment"></textarea>
+        </label>
+
+        <label class="wide">
+          Notes
+          <textarea rows="3" name="notes" maxlength="2000"
+                    [(ngModel)]="consultation.notes"></textarea>
+        </label>
+
+        <div class="message error wide" *ngIf="saveError" role="alert">{{ saveError }}</div>
+        <div class="message success wide" *ngIf="saveMessage" role="status">{{ saveMessage }}</div>
+
+        <button type="submit" class="primary-button wide" [disabled]="saving">
+          {{ saving ? 'Saving...' : 'Save record & complete visit' }}
+        </button>
+
+      </form>
+
+      <div class="message success" *ngIf="selected.status === 'Completed' && saveMessage" role="status">
+        {{ saveMessage }}
+      </div>
+
+    </aside>
+
+  </div>
+
+</div>
